@@ -73,7 +73,7 @@ onMounted(() => {
   position: absolute;
   top: 20px;
   left: 28px;
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .16em;
@@ -90,7 +90,7 @@ onMounted(() => {
   gap: 14px;
   padding: 24px 18px;
   background: #f4f4ef;
-  border-left: 6px solid #ffe500;
+  border-left: 6px solid var(--yellow);
   overflow-y: auto;
 }
 
@@ -125,7 +125,7 @@ onMounted(() => {
 .st-controls button:hover:not(:disabled),
 .st-controls button.active {
   transform: translateX(-4px);
-  background: #ffe500;
+  background: var(--yellow);
 }
 
 .st-controls button:disabled {
@@ -146,7 +146,7 @@ onMounted(() => {
 .st-field select,
 .st-field input {
   width: 100%;
-  accent-color: #ffe500;
+  accent-color: var(--yellow);
   font: inherit;
 }
 
@@ -188,7 +188,7 @@ onMounted(() => {
   display: block;
   width: fit-content;
   cursor: pointer;
-  background-color: #ffe500;
+  background-color: var(--yellow);
   padding: 0 .6em;
 }
 
@@ -219,8 +219,8 @@ onMounted(() => {
   grid-template-columns: 220px 1fr;
   grid-template-rows: 44px 1fr;
   height: 100vh;
-  background: #080808;
-  color: var(--fg, #f8f8ee);
+  background: var(--bg);
+  color: var(--fg, var(--fg));
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
@@ -244,10 +244,10 @@ onMounted(() => {
   transition: color .15s;
 }
 
-.demo-back:hover { color: #ffe500; }
+.demo-back:hover { color: var(--yellow); }
 
 .demo-brand {
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .22em;

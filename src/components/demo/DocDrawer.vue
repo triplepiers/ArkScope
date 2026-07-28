@@ -186,13 +186,13 @@ function highlightVue(code) {
   border-left: 1px solid rgba(248, 248, 238, .18);
   background: rgba(14, 14, 14, .88);
   backdrop-filter: blur(8px);
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 10px;
   cursor: pointer;
   transition: background .15s;
 }
 
-.doc-drawer-toggle:hover { background: #ffe500; }
+.doc-drawer-toggle:hover { background: var(--yellow); }
 .doc-drawer-toggle:hover * { color: #000; }
 
 .toggle-label {
@@ -222,7 +222,7 @@ function highlightVue(code) {
 .doc-name {
   font-size: 20px;
   font-weight: 600;
-  color: #f4f1df;
+  color: var(--paper);
   margin: 0 0 6px;
 }
 
@@ -236,7 +236,7 @@ function highlightVue(code) {
 .doc-section { margin-bottom: 28px; }
 
 .doc-section h3 {
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .1em;
@@ -277,7 +277,7 @@ function highlightVue(code) {
   transition: background .15s;
 }
 
-.doc-copy-btn:hover { background: #222; color: #ffe500; border-color: #ffe500; }
+.doc-copy-btn:hover { background: #222; color: var(--yellow); border-color: var(--yellow); }
 
 .doc-table {
   width: 100%;
@@ -303,7 +303,7 @@ function highlightVue(code) {
 }
 
 .doc-table code {
-  color: #00c8ff;
+  color: var(--blue);
   font-size: 11px;
   font-family: ui-monospace, monospace;
 }

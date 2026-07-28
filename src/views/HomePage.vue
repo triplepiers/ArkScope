@@ -105,7 +105,7 @@ onMounted(scheduleDemoPreload)
 .home {
   position: fixed;
   inset: 0;
-  background: #080808;
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -128,10 +128,10 @@ onMounted(scheduleDemoPreload)
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, #ffe500 0 100%) 0 0 / min(32vw, 460px) 12px no-repeat,
-    linear-gradient(90deg, #ffe500 0 100%) 0 100% / min(44vw, 680px) 14px no-repeat,
-    linear-gradient(90deg, #00c8ff 0 100%) 73vw 14vh / 15vw 14px no-repeat,
-    linear-gradient(90deg, #ff3f86 0 100%) 78vw 18vh / 10vw 14px no-repeat,
+    linear-gradient(90deg, var(--yellow) 0 100%) 0 0 / min(32vw, 460px) 12px no-repeat,
+    linear-gradient(90deg, var(--yellow) 0 100%) 0 100% / min(44vw, 680px) 14px no-repeat,
+    linear-gradient(90deg, var(--blue) 0 100%) 73vw 14vh / 15vw 14px no-repeat,
+    linear-gradient(90deg, var(--pink) 0 100%) 78vw 18vh / 10vw 14px no-repeat,
     linear-gradient(180deg, rgba(248, 248, 238, .9), rgba(248, 248, 238, .9)) 32px 24px / 1px calc(100% - 96px) no-repeat,
     linear-gradient(180deg, rgba(248, 248, 238, .32), rgba(248, 248, 238, .32)) calc(100% - 32px) 72px / 1px calc(100% - 144px) no-repeat;
 }
@@ -174,7 +174,7 @@ onMounted(scheduleDemoPreload)
   align-items: center;
   justify-content: space-between;
   min-height: 42px;
-  color: #f4f1df;
+  color: var(--paper);
 }
 
 .home-hero {
@@ -191,8 +191,8 @@ onMounted(scheduleDemoPreload)
 .home-eyebrow {
   display: inline-block;
   padding: 5px 10px;
-  background: #ffe500;
-  color: #080808;
+  background: var(--yellow);
+  color: var(--bg);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: .08em;
@@ -204,7 +204,7 @@ onMounted(scheduleDemoPreload)
   font-size: clamp(52px, 8vw, 118px);
   font-weight: 900;
   line-height: .92;
-  color: #f4f1df;
+  color: var(--paper);
   margin: 0 0 22px;
   text-transform: uppercase;
   text-wrap: balance;
@@ -227,12 +227,12 @@ onMounted(scheduleDemoPreload)
   gap: 28px;
   min-height: 48px;
   min-width: 210px;
-  border: 2px solid #f4f1df;
-  border-left: 12px solid #ffe500;
+  border: 2px solid var(--paper);
+  border-left: 12px solid var(--yellow);
   border-radius: 0;
   padding: 12px 16px 12px 28px;
   background: rgba(8, 8, 8, .72);
-  color: #f4f1df;
+  color: var(--paper);
   font: inherit;
   font-size: 14px;
   font-weight: 900;
@@ -242,9 +242,9 @@ onMounted(scheduleDemoPreload)
 }
 
 .home-enter:hover {
-  border-color: #ffe500;
-  background: #ffe500;
-  color: #080808;
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: var(--bg);
   transform: translateX(6px);
 }
 
@@ -258,14 +258,14 @@ onMounted(scheduleDemoPreload)
   gap: 15px;
   align-self: end;
   margin-bottom: 9vh;
-  color: #080808;
+  color: var(--bg);
 }
 
 .home-system div {
   display: grid;
   gap: 10px;
   padding: 14px 16px;
-  border-left: 8px solid #ffe500;
+  border-left: 8px solid var(--yellow);
   background: rgba(244, 241, 223, .92);
   box-shadow: 8px 8px 0 rgba(255, 229, 0, .94);
 }

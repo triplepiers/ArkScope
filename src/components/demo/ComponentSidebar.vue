@@ -37,7 +37,7 @@ const emit = defineEmits(['select'])
 }
 
 .comp-sidebar-title {
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .14em;
@@ -58,8 +58,8 @@ const emit = defineEmits(['select'])
   transition: border-color .15s, background .15s, color .15s;
 }
 
-.comp-sidebar button:hover { color: #f4f1df; background: rgba(255, 229, 0, .05); }
-.comp-sidebar button.active { border-left-color: #ffe500; color: #f4f1df; background: rgba(255, 229, 0, .08); }
+.comp-sidebar button:hover { color: var(--paper); background: rgba(255, 229, 0, .05); }
+.comp-sidebar button.active { border-left-color: var(--yellow); color: var(--paper); background: rgba(255, 229, 0, .08); }
 
 .comp-name { font-size: 14px; font-weight: 600; }
 .comp-tag { font-size: 10px; font-family: ui-monospace, monospace; opacity: .52; }

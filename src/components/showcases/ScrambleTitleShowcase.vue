@@ -79,7 +79,7 @@ const text = computed(() => PRESETS[activeIndex.value].text)
 
 .st-eyebrow {
   margin: 0;
-  color: #ffe500;
+  color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .14em;
