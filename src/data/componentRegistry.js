@@ -98,4 +98,37 @@ export const componentRegistry = [
     ],
     component: () => import('../components/showcases/Particle3DShowcase.vue'),
   },
+  {
+    id: 'isometric-wave',
+    name: 'IsometricWave',
+    tag: '<IsometricWave>',
+    description: '模仿「莱茵生命·访问」中的数据检索 UI：SVG 等距斜切矩形阵列，鼠标经过时形成弹性波峰。',
+    usage: `<IsometricWave
+  :count="18"
+  :radius="95"
+  :ease="14"
+  :bar-width="118"
+  :corner="4"
+  fill="#162129"
+  :fill-opacity="0.42"
+  stroke="#d8f4ff"
+  @change="onChange"
+/>`,
+    props: [
+      { name: 'count', type: 'Number', default: '18', desc: '条块总数。组件内部会限制在 4 到 48 之间' },
+      { name: 'radius', type: 'Number', default: '95', desc: '指针影响范围。值越大，被抬升的波峰范围越宽' },
+      { name: 'ease', type: 'Number', default: '14', desc: '缓动阻尼。值越大，条块追逐目标高度的速度越慢' },
+      { name: 'barWidth', type: 'Number', default: '118', desc: '每个斜切条块的斜边长度' },
+      { name: 'corner', type: 'Number', default: '4', desc: '斜切边缘厚度，影响 path 圆角和内边线位置' },
+      { name: 'fill', type: 'String', default: '#162129', desc: '条块主体填充色' },
+      { name: 'fillOpacity', type: 'Number', default: '0.42', desc: '主体填充透明度，范围 0 到 1' },
+      { name: 'stroke', type: 'String', default: '#d8f4ff', desc: '条块外轮廓描边色' },
+      { name: 'innerStroke', type: 'String', default: '#5d7784', desc: '条块内侧边线描边色' },
+      { name: 'active', type: 'Boolean', default: 'true', desc: '是否启用逐帧高度与亮度缓动' },
+    ],
+    events: [
+      { name: 'change', payload: '{ count, peak }', desc: '条块数量重建后触发。peak 为当前基础高度中的最大值' },
+    ],
+    component: () => import('../components/showcases/IsometricWaveShowcase.vue'),
+  },
 ]

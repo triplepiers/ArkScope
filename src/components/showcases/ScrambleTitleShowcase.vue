@@ -75,15 +75,6 @@ const text = computed(() => PRESETS[activeIndex.value].text)
 </template>
 
 <style scoped>
-.st-status {
-  position: absolute;
-  top: 20px;
-  right: 28px;
-  color: rgba(248, 248, 238, .42);
-  font-size: 11px;
-  font-weight: 700;
-}
-
 .st-copy { min-width: 0; }
 
 .st-eyebrow {

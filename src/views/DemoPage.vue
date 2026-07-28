@@ -49,6 +49,15 @@ function onSelect(entry) {
   background-size: 60px 60px, 60px 60px;
 }
 
+.st-status {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  color: rgba(248, 248, 238, .42);
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .st-stage {
   position: relative;
   display: grid;
@@ -79,6 +88,16 @@ function onSelect(entry) {
   background: #f4f4ef;
   border-left: 6px solid #ffe500;
   overflow-y: auto;
+}
+
+.st-color {
+  cursor: pointer;
+  height: 34px;
+  /* padding: 2px; */
+  padding: 0;
+  border: none; 
+  border-radius: 0;
+  background: transparent;
 }
 
 .st-presets {
