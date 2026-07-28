@@ -1,3 +1,27 @@
+const showcaseLoaders = {
+  'scramble-title': () => import('../components/showcases/ScrambleTitleShowcase.vue'),
+  'particle-2d': () => import('../components/showcases/Particle2DShowcase.vue'),
+  'particle-3d': () => import('../components/showcases/Particle3DShowcase.vue'),
+  'isometric-wave': () => import('../components/showcases/IsometricWaveShowcase.vue'),
+}
+
+const showcasePromises = new Map()
+
+function loadShowcase(id) {
+  if (!showcasePromises.has(id)) {
+    showcasePromises.set(id, showcaseLoaders[id]())
+  }
+  return showcasePromises.get(id)
+}
+
+export function preloadShowcase(id) {
+  return loadShowcase(id)
+}
+
+export function preloadShowcases() {
+  return Promise.all(componentRegistry.map((entry) => entry.preload()))
+}
+
 export const componentRegistry = [
   {
     id: 'scramble-title',
@@ -27,7 +51,8 @@ export const componentRegistry = [
       { name: 'flashStart', payload: '无', desc: '占位符展开开始时触发' },
       { name: 'flashDone', payload: '无', desc: '全部字符稳定后触发' },
     ],
-    component: () => import('../components/showcases/ScrambleTitleShowcase.vue'),
+    component: () => loadShowcase('scramble-title'),
+    preload: () => preloadShowcase('scramble-title'),
   },
   {
     id: 'particle-2d',
@@ -63,7 +88,8 @@ export const componentRegistry = [
       { name: 'uploadMask', params: '(file) => index', desc: '上传自定义图片 mask，返回新 index' },
       { name: 'scatter', params: '()', desc: '随机打散所有粒子' },
     ],
-    component: () => import('../components/showcases/Particle2DShowcase.vue'),
+    component: () => loadShowcase('particle-2d'),
+    preload: () => preloadShowcase('particle-2d'),
   },
   {
     id: 'particle-3d',
@@ -96,7 +122,8 @@ export const componentRegistry = [
       { name: 'uploadMask', params: '(file) => index', desc: '上传图片或 GLB/GLTF 文件，自动识别格式并返回新 index' },
       { name: 'scatter', params: '()', desc: '随机打散所有粒子' },
     ],
-    component: () => import('../components/showcases/Particle3DShowcase.vue'),
+    component: () => loadShowcase('particle-3d'),
+    preload: () => preloadShowcase('particle-3d'),
   },
   {
     id: 'isometric-wave',
@@ -129,6 +156,7 @@ export const componentRegistry = [
     events: [
       { name: 'change', payload: '{ count, peak }', desc: '条块数量重建后触发。peak 为当前基础高度中的最大值' },
     ],
-    component: () => import('../components/showcases/IsometricWaveShowcase.vue'),
+    component: () => loadShowcase('isometric-wave'),
+    preload: () => preloadShowcase('isometric-wave'),
   },
 ]

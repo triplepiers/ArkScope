@@ -1,20 +1,36 @@
 <script setup>
-import { ref } from 'vue'
-import Particle3DMaskController from '@/components/Particle3D/Particle3DMaskController.vue'
-import { generateArkshipPoints, generateAnchorPoints, generateReactorPoints } from '@/utils/particle3DModels.js'
+import { onMounted, ref, shallowRef } from 'vue'
 
-const presets = [
-  { name: 'ARKSHIP', generator: generateArkshipPoints },
-  { name: 'ANCHOR', generator: generateAnchorPoints },
-  { name: 'REACTOR', generator: generateReactorPoints },
+const Particle3DMaskController = shallowRef(null)
+const presetSpecs = [
+  { name: 'ARKSHIP', key: 'generateArkshipPoints' },
+  { name: 'ANCHOR', key: 'generateAnchorPoints' },
+  { name: 'REACTOR', key: 'generateReactorPoints' },
 ]
+const presets = ref([])
 
 const controllerRef = ref(null)
 const modelName = ref('ARKSHIP')
-const particleInfo = ref('0 visible particles')
+const particleInfo = ref('loading model renderer')
 const activeIndex = ref(0)
 const uploadHint = ref('PNG / JPG / GLB / GLTF')
 const hasCustom = ref(false)
+const rendererLoading = ref(true)
+
+async function loadParticleDemo() {
+  rendererLoading.value = true
+  const [controllerMod, modelMod] = await Promise.all([
+    import('@/components/Particle3D/Particle3DMaskController.vue'),
+    import('@/utils/particle3DModels.js'),
+  ])
+
+  presets.value = presetSpecs.map((preset) => ({
+    name: preset.name,
+    generator: modelMod[preset.key],
+  }))
+  Particle3DMaskController.value = controllerMod.default
+  rendererLoading.value = false
+}
 
 function onChange({ index, model }) {
   modelName.value = model.name
@@ -23,15 +39,16 @@ function onChange({ index, model }) {
 }
 
 function handleSwitch(index) {
+  if (rendererLoading.value) return
   controllerRef.value?.switchModel(index)
 }
 
 async function handleUpload(e) {
   const file = e.target.files?.[0]
-  if (!file) return
+  if (!file || rendererLoading.value) return
   uploadHint.value = 'SAMPLING...'
   try {
-    const idx = await controllerRef.value.uploadMask(file)
+    await controllerRef.value.uploadMask(file)
     hasCustom.value = true
     uploadHint.value = file.name.toUpperCase()
   } catch (err) {
@@ -39,6 +56,8 @@ async function handleUpload(e) {
     console.error(err)
   } finally { e.target.value = '' }
 }
+
+onMounted(loadParticleDemo)
 </script>
 
 <template>
@@ -47,7 +66,16 @@ async function handleUpload(e) {
       <div class="st-brand">3D PARTICLES. ENDFIELD</div>
       <div class="st-display">
         <div class="p3d">
-          <Particle3DMaskController ref="controllerRef" :masks="presets" @change="onChange" />
+          <component
+            :is="Particle3DMaskController"
+            v-if="Particle3DMaskController"
+            ref="controllerRef"
+            :masks="presets"
+            @change="onChange"
+          />
+          <div v-else class="particle-loading">
+            <span>LOADING MODEL</span>
+          </div>
         </div>
         <div class="p-status">
           <span>{{ modelName }}</span>
@@ -57,14 +85,16 @@ async function handleUpload(e) {
     </div>
     <div class="st-controls">
       <button class="st-btn" type="button"
-        @click="controllerRef?.scatter(); setTimeout(() => controllerRef?.switchMaskWithTransition(activeIndex, 0), 180)">
+        :disabled="rendererLoading"
+        @click="controllerRef?.scatter(); setTimeout(() => controllerRef?.switchModel(activeIndex), 180)">
         SCATTER
       </button>
       <label class="st-field">
         <span>MASK LIBRARY</span>
         <div class="st-presets">
-          <button v-for="(p, i) in presets" :key="p.name"
+          <button v-for="(p, i) in presetSpecs" :key="p.name"
             :class="{ active: activeIndex === i}" type="button"
+            :disabled="rendererLoading"
             @click="handleSwitch(i)">{{p.name }}
           </button>
         </div>
@@ -73,13 +103,13 @@ async function handleUpload(e) {
         <div class="line">
           <span>UPLOAD MASK</span>
           <label class="p-upload">
-            <input type="file" accept="image/*,.glb,.gltf" @change="handleUpload" />
+            <input type="file" accept="image/*,.glb,.gltf" :disabled="rendererLoading" @change="handleUpload" />
             选择文件
           </label>
         </div>
         <div class="st-presets">
-          <button :class="{ active: activeIndex >= presets.length }" :disabled="!hasCustom" type="button"
-            @click="handleSwitch(presets.length)">{{ uploadHint || "CUSTOM" }}</button>
+          <button :class="{ active: activeIndex >= presetSpecs.length }" :disabled="rendererLoading || !hasCustom" type="button"
+            @click="handleSwitch(presetSpecs.length)">{{ uploadHint || "CUSTOM" }}</button>
         </div>
       </label>
     </div>
@@ -102,5 +132,16 @@ async function handleUpload(e) {
   transform: translateY(-50%);
   width: max(400px, 100%);
   height: max(500px, 100%);
+}
+
+.particle-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(248, 248, 238, .28);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
 }
 </style>

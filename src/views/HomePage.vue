@@ -1,16 +1,38 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import ScrambleTitle from '@/components/ScrambleTitle/index.vue'
+import { preloadShowcases } from '@/data/componentRegistry.js'
+import { preloadDemoPage } from '@/router/loaders.js'
 
 const router = useRouter()
 const entered = ref(false)
 const trigger = ref(0)
+let preloadStarted = false
+
+function warmDemoChunks() {
+  if (preloadStarted) return
+  preloadStarted = true
+  void preloadDemoPage()
+  void preloadShowcases()
+}
+
+function scheduleDemoPreload() {
+  if (typeof window === 'undefined') return
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(warmDemoChunks, { timeout: 1200 })
+    return
+  }
+  window.setTimeout(warmDemoChunks, 300)
+}
 
 function onEnter() {
+  warmDemoChunks()
   entered.value = true
   setTimeout(() => router.push('/demo'), 600)
 }
+
+onMounted(scheduleDemoPreload)
 </script>
 
 <template>
@@ -46,7 +68,13 @@ function onEnter() {
             />
           </p>
 
-          <button class="home-enter" type="button" @click="onEnter">
+          <button
+            class="home-enter"
+            type="button"
+            @focus="warmDemoChunks"
+            @pointerenter="warmDemoChunks"
+            @click="onEnter"
+          >
             <span>EXPLORE</span>
             <span class="home-enter-icon">›</span>
           </button>

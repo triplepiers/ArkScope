@@ -15,6 +15,8 @@ const emit = defineEmits(['select'])
       :key="entry.id"
       :class="{ active: activeId === entry.id }"
       type="button"
+      @focus="entry.preload?.()"
+      @pointerenter="entry.preload?.()"
       @click="emit('select', entry)"
     >
       <span class="comp-name">{{ entry.name }}</span>

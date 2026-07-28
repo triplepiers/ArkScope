@@ -6,10 +6,16 @@ const props = defineProps({
 })
 
 const Comp = shallowRef(null)
+let loadToken = 0
 
 watch(() => props.entry, async (entry) => {
-  if (!entry) { Comp.value = null; return }
+  const token = ++loadToken
+  if (!entry) {
+    Comp.value = null
+    return
+  }
   const mod = await entry.component()
+  if (token !== loadToken) return
   Comp.value = mod.default
 }, { immediate: true })
 </script>

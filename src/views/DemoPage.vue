@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { componentRegistry } from '@/data/componentRegistry.js'
+import { onMounted, ref } from 'vue'
+import { componentRegistry, preloadShowcases } from '@/data/componentRegistry.js'
 import ComponentSidebar from '@/components/demo/ComponentSidebar.vue'
 import DemoStage from '@/components/demo/DemoStage.vue'
 import DocDrawer from '@/components/demo/DocDrawer.vue'
@@ -12,6 +12,10 @@ function onSelect(entry) {
   activeId.value = entry.id
   activeEntry.value = entry
 }
+
+onMounted(() => {
+  void preloadShowcases()
+})
 </script>
 
 <template>
