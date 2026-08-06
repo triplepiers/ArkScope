@@ -13,3 +13,5 @@
     - `Particle3D`：[终末地](https://endfield.hypergryph.com/#lore) 的 3D 点云（旋转 / 切换）
 
     - `IsometricWave`：「[莱茵生命 · 访问](https://www.bilibili.com/list/161775300?oid=768610733&bvid=BV1rr4y1b7sz)」PV 里的类亚克力质感 Hover 交互（实际上完全不亚克力呢）
+
+    - `FullScreenNavigator`：[明日方舟](https://ak.hypergryph.com) 的全屏滚动 Section 切换（附带 Section + 标题 的 Reveal 动画，滚动方向敏感）

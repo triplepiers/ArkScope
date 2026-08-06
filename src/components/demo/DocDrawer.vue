@@ -65,6 +65,24 @@ function highlightVue(code) {
     },
   )
 }
+
+function highlightJs(code) {
+  const source = escapeHtml(code)
+  return source.replace(
+    /(`(?:\\.|[^`])*`|"(?:\\.|[^\"])*"|'(?:\\.|[^'])*')|\b(const|let|var|import|from|export|return|true|false|null|undefined)\b|(\b[A-Za-z_$][\w$]*\b)(?=\s*:)|(\b\d+(?:\.\d+)?\b)/g,
+    (match, string, keyword, property, number) => {
+      if (string) return `<span class="hl-attr">${string}</span>`
+      if (keyword) return `<span class="hl-dir">${keyword}</span>`
+      if (property) return `<span class="hl-tag">${property}</span>`
+      if (number) return `<span class="hl-interp">${number}</span>`
+      return match
+    },
+  )
+}
+
+function highlightUsage(block) {
+  return block.language === 'js' ? highlightJs(block.code) : highlightVue(block.code)
+}
 </script>
 
 <template>
@@ -79,13 +97,27 @@ function highlightVue(code) {
         <h2 class="doc-name">{{ entry.name }}</h2>
         <p class="doc-desc">{{ entry.description }}</p>
 
-        <section class="doc-section">
+        <section v-if="entry.features?.length" class="doc-section">
+          <h3>Features</h3>
+          <ul class="doc-features">
+            <li v-for="feature in entry.features" :key="feature">{{ feature }}</li>
+          </ul>
+        </section>
+
+        <section v-if="entry.usage || entry.usageBlocks?.length" class="doc-section">
           <h3>Usage</h3>
-          <div class="doc-code-block">
-            <pre><code v-html="highlightVue(entry.usage)"></code></pre>
-            <button class="doc-copy-btn" type="button" @click="copy(entry.usage)">
-              {{ copied === entry.usage ? 'COPIED' : 'COPY' }}
-            </button>
+          <div
+            v-for="block in (entry.usageBlocks ?? [{ code: entry.usage }])"
+            :key="block.label ?? block.code"
+            class="doc-usage-block"
+          >
+            <h4 v-if="block.label">{{ block.label }}</h4>
+            <div class="doc-code-block">
+              <pre><code v-html="highlightUsage(block)"></code></pre>
+              <button class="doc-copy-btn" type="button" @click="copy(block.code)">
+                {{ copied === block.code ? 'COPIED' : 'COPY' }}
+              </button>
+            </div>
           </div>
         </section>
 
@@ -242,6 +274,11 @@ function highlightVue(code) {
   letter-spacing: .1em;
   margin: 0 0 10px;
 }
+
+.doc-features { display: grid; gap: 7px; margin: 0; padding-left: 18px; color: rgba(248, 248, 238, .68); font-size: 12px; line-height: 1.5; }
+.doc-features li::marker { color: var(--yellow); }
+.doc-usage-block + .doc-usage-block { margin-top: 14px; }
+.doc-usage-block h4 { margin: 0 0 6px; color: rgba(248, 248, 238, .48); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 
 .doc-code-block {
   position: relative;

@@ -3,6 +3,7 @@ const showcaseLoaders = {
   'particle-2d': () => import('../components/showcases/Particle2DShowcase.vue'),
   'particle-3d': () => import('../components/showcases/Particle3DShowcase.vue'),
   'isometric-wave': () => import('../components/showcases/IsometricWaveShowcase.vue'),
+  'full-screen-navigator': () => import('../components/showcases/FullScreenNavigatorShowcase/index.vue'),
 }
 
 const showcasePromises = new Map()
@@ -158,5 +159,68 @@ export const componentRegistry = [
     ],
     component: () => loadShowcase('isometric-wave'),
     preload: () => preloadShowcase('isometric-wave'),
+  },
+    {
+    id: 'full-screen-navigator',
+    name: 'FullScreenNavigator',
+    tag: '<FullScreenNavigator>',
+    description: '来着「明日方舟」的分段全屏滚动控制器',
+    features: [
+      '离散全屏滚动：向上/下会应用镜像 reveal 入场动画',
+      '最后一个 section 与 footer 合并为自由滚动',
+      '支持动态配置：section 内容组件 + 标题 marker 颜色与绝对定位。',
+    ],
+    usageBlocks: [
+      {
+        label: 'Section configuration',
+        language: 'js',
+        code: `const sections = [
+  {
+    component: IntroSection,
+    title: 'INTRO',
+    reveal: 'wipe',
+    marker: { foreground: '#fff', highlight: '#18d1ff' },
+  },
+  {
+    component: SignalSection,
+    title: 'SIGNAL',
+    marker: {
+      foreground: '#102127',
+      highlight: '#176a72',
+      position: { top: '50%', right: '40px', transform: 'translateY(-50%)' },
+    },
+  },
+]
+const footer = { component: FooterSection }`,
+      },
+      {
+        label: 'Component',
+        language: 'vue',
+        code: `<FullScreenNavigator
+  :sections="sections"
+  :footer="footer"
+  :marker-highlight="'#18d1ff'"
+/>`,
+      },
+    ],
+
+    props: [
+      { name: 'sections', type: 'Array<Section>', default: 'required', desc: '按展示顺序传入 section 配置。' },
+      { name: 'footer', type: '{ component, props? }', default: 'null', desc: '拼接在最后 section 后的自由滚动内容。' },
+      { name: 'duration', type: 'Number', default: '700', desc: 'section reveal 时长（ms）。' },
+      { name: 'inputGap', type: 'Number', default: '1000', desc: '每次接受导航输入后的冷却时间（ms），避免长滑动或滚轮惯性连续跨 section。' },
+      { name: 'markerHighlight', type: 'String', default: '#18d1ff', desc: '所有 section 未覆盖时使用的主编号颜色。' },
+    ],
+    config: [
+      { name: 'section.component', signature: 'Component', desc: '要渲染的已导入 Vue 组件。' },
+      { name: 'section.title', signature: 'string', desc: 'marker 的 section 标题。' },
+      { name: 'section.props', signature: 'Record<string, unknown>', desc: '透传给 section.component 的 props。' },
+      { name: 'section.marker.highlight', signature: 'string', desc: '大编号高亮色；默认继承 markerHighlight。' },
+      { name: 'section.marker.foreground', signature: 'string', desc: '组合编号、ARKNIGHTS 与标题颜色；默认白色。' },
+      { name: 'section.marker.gradient', signature: 'CSS gradient', desc: '可选的其余 marker 文字渐变。' },
+      { name: 'section.marker.position', signature: '{ top, right, bottom, left, transform }', desc: '相对容器绝对定位；默认右侧垂直居中。' },
+    ],
+    component: () => loadShowcase('full-screen-navigator'),
+    preload: () => preloadShowcase('full-screen-navigator'),
   },
 ]

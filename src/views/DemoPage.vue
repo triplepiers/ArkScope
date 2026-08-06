@@ -71,12 +71,15 @@ onMounted(() => {
 
 .st-brand {
   position: absolute;
+  z-index: 999;
   top: 20px;
   left: 28px;
   color: var(--yellow);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .16em;
+  padding: .2em .5em;
+  background-color: rgba(0,0,0,.3);
 }
 
 .st-display {

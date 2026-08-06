@@ -6,33 +6,33 @@ const props = defineProps({
 })
 
 const Comp = shallowRef(null)
+const isLoading = shallowRef(false)
 let loadToken = 0
 
 watch(() => props.entry, async (entry) => {
   const token = ++loadToken
   if (!entry) {
     Comp.value = null
+    isLoading.value = false
     return
   }
+  isLoading.value = true
   const mod = await entry.component()
   if (token !== loadToken) return
   Comp.value = mod.default
+  isLoading.value = false
 }, { immediate: true })
 </script>
 
 <template>
   <div class="demo-stage-wrap">
-    <template v-if="Comp">
-      <Suspense>
-        <Transition name="stage-fade" mode="out-in">
-          <component :is="Comp" :key="entry?.id" />
-        </Transition>
-        <template #fallback>
-          <div class="stage-loading">LOADING...</div>
-        </template>
-      </Suspense>
-    </template>
-    <div v-else class="stage-empty">
+    <Transition name="stage-fade" mode="out-in">
+      <div v-if="Comp" :key="entry?.id" class="demo-stage-content">
+        <component :is="Comp" />
+      </div>
+    </Transition>
+    <div v-if="!Comp && isLoading" class="stage-loading">LOADING...</div>
+    <div v-if="!Comp && !isLoading" class="stage-empty">
       <span>Select a component from the left panel</span>
     </div>
   </div>
@@ -43,6 +43,11 @@ watch(() => props.entry, async (entry) => {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.demo-stage-content {
+  width: 100%;
+  height: 100%;
 }
 
 .stage-empty,
@@ -58,11 +63,12 @@ watch(() => props.entry, async (entry) => {
 
 .stage-fade-enter-active,
 .stage-fade-leave-active {
-  transition: opacity .2s ease;
+  transition: opacity .24s ease;
 }
 
 .stage-fade-enter-from,
 .stage-fade-leave-to {
   opacity: 0;
 }
+
 </style>
