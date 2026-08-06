@@ -8,12 +8,18 @@
 
     - `ScrambleTitle`：[塞壬唱片](https://monster-siren.hypergryph.com/music#album) 的文字解码组件
 
-    - `Particle2D`：[明日方舟](https://ak.hypergryph.com/#world) 的 2D 点云（斥力 / 切换）
-
-    - `Particle3D`：[终末地](https://endfield.hypergryph.com/#lore) 的 3D 点云（旋转 / 切换）
-
     - `IsometricWave`：「[莱茵生命 · 访问](https://www.bilibili.com/list/161775300?oid=768610733&bvid=BV1rr4y1b7sz)」PV 里的类亚克力质感 Hover 交互（实际上完全不亚克力呢）
 
     - `FullScreenNavigator`：[明日方舟](https://ak.hypergryph.com) 的全屏滚动 Section 切换（附带 Section + 标题 的 Reveal 动画，滚动方向敏感）
 
-    - `GameplayAlbum`：[终末地](https://endfield.hypergryph.com/#gameplay) 的轮播图组件（附带 Reveal & Blink 动画、自定义标题及内容）
+    - 轮播图
+
+        - `GameplayAlbum`：[终末地](https://endfield.hypergryph.com/#gameplay) 的轮播图组件（附带 Reveal & Blink）
+        
+        - `NoticeCarousel`：[终末地](https://endfield.hypergryph.com/#notice) 的版本公告轮播图组件（附带 Reveal & Blink）
+    
+    - 粒子效果
+
+        - `Particle2D`：[明日方舟](https://ak.hypergryph.com/#world) 的 2D 点云（斥力 / 切换）
+
+        - `Particle3D`：[终末地](https://endfield.hypergryph.com/#lore) 的 3D 点云（旋转 / 切换）

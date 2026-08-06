@@ -1,0 +1,55 @@
+<script setup>
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import titleMark from '@/assets/endfield/notice-carousel/section-title-mark.svg'
+import towerTop from '@/assets/endfield/notice-carousel/tower-top.png'
+import towerBottom from '@/assets/endfield/notice-carousel/tower-bottom.png'
+import decoText from '@/assets/endfield/notice-carousel/left-deco-text.png'
+import NoticeMoreButton from '@/components/Buttons/Endfield/NoticeMoreButton.vue'
+
+const props = defineProps({
+  title: { type: Object, default: () => ({ en: 'NOTICE', cn: '公告' }) },
+  records: { type: Array, default: () => [] },
+  moreLabel: { type: String, default: '更多情报' },
+  moreHref: { type: String, default: '' },
+})
+const emit = defineEmits(['change', 'more'])
+const active = ref(0)
+const replayKey = ref(0)
+const root = ref(null)
+let observer
+const current = computed(() => props.records[active.value] ?? { tab: '公告', date: '', title: '暂无公告' })
+
+watch(() => props.records, () => { active.value = 0 }, { deep: true })
+function go(index) { if (index < 0 || index >= props.records.length || index === active.value) return; active.value = index; emit('change', { index, record: current.value }) }
+async function reset() { replayKey.value += 1; await nextTick() }
+function offset(index) {
+  const delta = index - active.value
+  const source = -124.16 * delta + (delta > 0 ? 40.04 : delta < 0 ? -40.04 : 0)
+  const clearance = delta > 0 ? 1.75 : delta < 0 ? -1.75 : 0
+  return `translateX(${delta * 440 + (source / 16 + clearance) * 8}px)`
+}
+onMounted(() => { observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) reset() }, { threshold: .2 }); observer.observe(root.value) })
+onBeforeUnmount(() => observer?.disconnect())
+defineExpose({ reset, go })
+</script>
+
+<template>
+  <section ref="root" :key="replayKey" class="notice-carousel">
+    <header class="nc-title"><img :src="titleMark" alt="" /><i class="nc-arrow"><svg viewBox="0 0 23 23"><path fill="currentColor" d="M2.673 22.418v-3.02h14.473L.74 2.992 2.875.857 19.28 17.263V2.791h3.02v19.627z" /></svg></i><span>{{ title.en }}</span><b>{{ title.cn }}</b></header>
+    <aside class="nc-deco"><div class="nc-tower-wrap"><div class="nc-tower nc-tower-bottom"><img :src="towerBottom" alt="" /></div></div><img class="nc-tower nc-tower-top" :src="towerTop" alt="" /><div class="nc-latest">最新<i /><img :src="decoText" alt="" /></div></aside>
+    <div class="nc-content">
+      <div class="nc-track-shell"><div class="nc-cards">
+        <article v-for="(record, index) in records" :key="record.id ?? record.title ?? index" class="nc-item" :style="{ transform: offset(index) }"><button class="nc-card" :class="{ active: index === active }" type="button" @click="go(index)"><img v-if="record.image" :src="record.image" :alt="record.title" /><span v-else>NOTICE</span></button></article>
+      </div></div>
+      <div class="nc-copy" :key="active"><div>// {{ current.tab }} <time>{{ current.date }}</time></div><h2>{{ current.title }}</h2></div>
+      <nav class="nc-pager" aria-label="公告轮播"><button type="button" :disabled="active === 0" aria-label="上一条" @click="go(active - 1)"><svg viewBox="0 0 18 27" aria-hidden="true"><path fill="currentColor" d="m14.142.127 3.611 3.61-9.79 9.79 9.79 9.791-3.611 3.61L.743 13.527z" /></svg></button><button type="button" :disabled="active === records.length - 1" aria-label="下一条" @click="go(active + 1)"><svg viewBox="0 0 18 27" aria-hidden="true"><path fill="currentColor" d="m14.142.127 3.611 3.61-9.79 9.79 9.79 9.791-3.611 3.61L.743 13.527z" /></svg></button></nav>
+      <NoticeMoreButton :label="moreLabel" :href="moreHref" @click="emit('more')" />
+    </div>
+  </section>
+</template>
+
+<style scoped>
+@font-face { font-family:NcGilroy; src:url('@/assets/fonts/endfield/gilroy-medium.woff2'); } @font-face { font-family:NcHarmony; src:url('@/assets/fonts/endfield/harmonyos-sans-sc-medium.woff2'); } @font-face { font-family:NcHarmonyBold; src:url('@/assets/fonts/endfield/harmonyos-sans-sc-bold.woff2'); }
+.notice-carousel{position:relative;width:1280px;height:683px;overflow:hidden;background:#fff;color:#191919;font-family:NcGilroy,Arial,sans-serif}.nc-title{position:absolute;z-index:3;top:108px;left:calc(50% - 426px);width:200px;height:80px}.nc-title>img{position:absolute;top:-7px;width:61px;height:3px;opacity:.5}.nc-arrow{position:absolute;width:52px;height:16px;overflow:hidden;background:#d9d9d9;transform:translateX(-100%);animation:nc-block .5s ease-out forwards}.nc-arrow svg{position:absolute;right:3px;top:2px;width:12px;height:12px;transform:rotate(-45deg);animation:nc-arrow .2s .3s ease-out forwards}.nc-title span{position:absolute;left:52px;font:18px/16px NcGilroy;opacity:0;animation:nc-flash .3s .4s forwards}.nc-title b{position:absolute;top:20px;font:24px/1 NcHarmonyBold;white-space:nowrap;opacity:0;animation:nc-flash .3s .6s forwards}.nc-deco{position:absolute;top:69px;left:calc(50% - 533px);width:66px;height:565px;overflow:hidden;background:#fffa00;clip-path:polygon(-100% 0,200% 0,200% 0,-100% 0);animation:nc-clip .5s forwards}.nc-tower{position:absolute;left:-47px;width:166px;height:183px;background:center/contain no-repeat;opacity:0;transform:translateY(30%);animation:nc-rise .6s forwards}.nc-tower-top{top:22px;background-image:linear-gradient(135deg,transparent 20%,#505050 20% 22%,transparent 22% 40%,#888 40% 42%,transparent 42%),linear-gradient(45deg,#aaa,#444)}.nc-tower-bottom{top:22px;background:linear-gradient(0deg,#fff9 0 34%,transparent 34%),linear-gradient(45deg,#777,#ddd);filter:grayscale(1);transform:translateY(0)}.nc-latest{position:absolute;bottom:74px;width:100%;text-align:center;font:18px/1 NcHarmonyBold;opacity:0;animation:nc-rise .5s .3s forwards}.nc-latest i{display:block;width:36px;height:1px;margin:10px auto;background:#626262}.nc-content{position:absolute;top:151px;left:calc(50% - 396px);width:762px;height:430px;opacity:0;transform:translateX(100%);animation:nc-in .3s .3s forwards}.nc-cards{position:absolute;top:130px;width:440px;height:248px}.nc-item{position:absolute;width:440px;height:248px;transition:transform .4s ease-in-out}.nc-card{position:relative;width:100%;height:100%;padding:0;overflow:hidden;border:0;border-radius:4px;background:#333;color:#fff;box-shadow:0 0 4px #0004;cursor:pointer;transform:scale(.818);transition:transform .4s}.nc-card.active{transform:scale(1)}.nc-card:after{position:absolute;inset:0;content:"";background:#0008;transition:opacity .4s}.nc-card.active:after{opacity:0}.nc-card img{width:100%;height:100%;object-fit:cover}.nc-card span{font:32px NcGilroy}.nc-copy{position:absolute;top:62px;left:12px;z-index:2;width:740px;animation:nc-copy .2s ease-out}.nc-copy>div{color:#777;font:12px/1 NcHarmony}.nc-copy time{margin-left:14px}.nc-copy h2{margin:10px 0 9px;font:18px/1 NcHarmony;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nc-copy:after{display:block;width:748px;height:1px;content:"";background:#d9d9d9}.nc-pager{position:absolute;top:405px;left:12px;display:flex;gap:30px;width:110px;height:42px;padding:3px;border:3px solid #e6e6e6;border-radius:21px;background:#e6e6e6}.nc-pager:before{position:absolute;inset:0;border-radius:18px;content:"";opacity:.05;background:linear-gradient(-45deg,transparent 14%,#000 14% 36%,transparent 36% 64%,#000 64% 86%,transparent 86%);background-size:4px 4px}.nc-pager button{position:relative;z-index:1;width:37px;height:37px;padding:0 0 3px;border:3px solid #e6e6e6;border-radius:50%;background:#fafafa;color:#3c3c3c;font:32px/1 Arial;box-shadow:0 0 5px #0004;cursor:pointer}.nc-pager button:hover:not(:disabled){background:#fffa00}.nc-pager button:disabled{color:#aaa}.nc-more{position:absolute;top:408px;left:150px;width:160px;height:36px;border:0;border-radius:2px;background:#383838;color:#eee;font:14px NcHarmony;cursor:pointer}.nc-more:before{position:absolute;top:8px;bottom:8px;left:4px;width:8px;content:"";background:#fffa00;clip-path:polygon(0 0,25% 0,25% 100%,0 100%);transition:.2s}.nc-more:hover:before{clip-path:polygon(0 20%,100% 50%,0 80%);transform:translateX(7px)}.nc-more span{position:relative}.nc-content>.nc-pager,.nc-content>.nc-more{opacity:0;animation:nc-flash .3s .8s forwards}@keyframes nc-block{to{transform:translateX(0)}}@keyframes nc-arrow{to{transform:rotate(0)}}@keyframes nc-clip{to{clip-path:polygon(-100% 0,200% 0,200% 100%,-100% 100%)}}@keyframes nc-rise{to{opacity:1;transform:translateY(0)}}@keyframes nc-in{to{opacity:1;transform:translateX(0)}}@keyframes nc-copy{from{opacity:0}to{opacity:1}}@keyframes nc-flash{0%{opacity:0}15%{opacity:.5}16%{opacity:0}35%{opacity:.7}36%{opacity:0}to{opacity:1}}@media(max-width:720px){.notice-carousel{height:560px}.nc-content{display:none}.nc-title{left:calc(50% - 145px);top:44px}.nc-deco{left:calc(50% - 250px);top:0;height:100%}.nc-latest{display:none}}
+.nc-deco{overflow:visible;background:transparent}.nc-tower-wrap{position:absolute;inset:0;overflow:hidden;background:#fffa00}.nc-tower{top:22px;left:-50px;width:166px;height:183px;object-fit:contain}.nc-tower-top{z-index:0;background:none}.nc-tower-bottom{background:none;filter:none;transform:translateY(30%)}.nc-tower-bottom img{display:block;width:100%;height:100%;object-fit:contain}.nc-tower-bottom:after{position:absolute;inset:0;content:"";background:linear-gradient(to bottom,transparent 52%,rgba(255,250,0,.52))}.nc-tower-wrap:after{display:none}.nc-deco:after{display:none}.nc-latest{z-index:2;top:auto;bottom:34px}.nc-latest i{margin:10px auto 12px}.nc-latest img{display:block;width:30px;height:87px;margin:auto;object-fit:contain}.nc-content{left:calc(50% - 420px)}.nc-track-shell{position:absolute;top:130px;left:0;width:1220px;height:248px;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 1208px,transparent 1220px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12px,#000 1208px,transparent 1220px)}.nc-cards{top:0;left:12px}.nc-copy{animation-duration:.6s}.nc-copy:after{width:1196px}.nc-title span{padding-left:4px}.nc-card{box-shadow:0 0 .5rem rgba(0,0,0,.25)}.nc-more{background:#383838;transition:color .2s,background-color .2s,border-radius .2s}.nc-more:before{inset:0;top:0;right:0;bottom:0;left:0;width:auto;clip-path:none;transform:none;border-radius:2px;background:url('@/assets/endfield/notice-carousel/button-texture.png') center/cover;transition:border-radius .2s}.nc-more:after{top:50%;left:4px;width:8px;height:55%;transform:translateY(-50%);position:absolute;content:"";background:#fffa00;clip-path:polygon(0 0,25% 0,25% 100%,0 100%);transition:transform .2s,clip-path .2s}.nc-more span{padding-top:2px}.nc-more:hover{background:#484848;color:#fff;border-radius:6px}.nc-more:hover:before{clip-path:none;transform:none;border-radius:6px}.nc-more:hover:after{clip-path:polygon(0 20%,100% 50%,0 80%);transform:translate(7px,-50%)}.nc-pager{width:auto;padding:0}.nc-pager button{display:grid;place-items:center;padding:0;font-size:0}.nc-pager button svg{width:9px;height:14px}.nc-pager button:last-child svg{transform:scaleX(-1)}@media(max-width:720px){.nc-latest{display:none}}
+</style>

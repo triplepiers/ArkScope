@@ -5,6 +5,7 @@ const showcaseLoaders = {
   'isometric-wave': () => import('../components/showcases/IsometricWaveShowcase.vue'),
   'full-screen-navigator': () => import('../components/showcases/FullScreenNavigatorShowcase/index.vue'),
   'gameplay-album': () => import('../components/showcases/GameplayAlbumShowcase.vue'),
+  'notice-carousel': () => import('../components/showcases/NoticeCarouselShowcase.vue'),
 }
 
 const showcasePromises = new Map()
@@ -212,6 +213,28 @@ export const componentRegistry = [
     ],
     component: () => loadShowcase('gameplay-album'),
     preload: () => preloadShowcase('gameplay-album'),
+  },
+  {
+    id: 'notice-carousel',
+    name: 'NoticeCarousel',
+    tag: '<NoticeCarousel>',
+    description: '来自「终末地」的公告卡片轮播组件',
+    features: [
+      '入场 reveal / blink 动画（支持 Reset）', 
+      '自定义：图片 + 标题列表',
+      '窄屏时保留标题与侧边装饰'
+    ],
+    usageBlocks: [{ label: 'Configuration', language: 'js', code: `const records = [\n  { tab: '公告', date: '2026.07.16', title: '版本更新说明', image: imageUrl },\n]` }],
+    props: [
+      { name: 'title', type: '{ en, cn }', default: "{ en: 'NOTICE', cn: '公告' }", desc: '区域的英文与中文标题。' },
+      { name: 'records', type: 'Array<{ tab, date, title, image? }>', default: '[]', desc: '公告轮播数据；image 不传时显示占位卡片。' },
+      { name: 'moreLabel', type: 'String', default: "'更多情报'", desc: '右侧操作按钮的文案。' },
+      { name: 'moreHref', type: 'String', default: "''", desc: '右侧按钮的链接；为空时保持当前页且不跳转。' },
+    ],
+    events: [{ name: 'change', payload: '{ index, record }', desc: '切换公告后触发。' }, { name: 'more', payload: '无', desc: '点击“更多情报”后触发，由调用方处理跳转。' }],
+    exposed: [{ name: 'reset', params: '()', desc: '重播入场动画。' }, { name: 'go', params: '(index)', desc: '切换至指定公告。' }],
+    component: () => loadShowcase('notice-carousel'),
+    preload: () => preloadShowcase('notice-carousel'),
   },
   {
     id: 'full-screen-navigator',
