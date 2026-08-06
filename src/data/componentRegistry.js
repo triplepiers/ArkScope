@@ -4,6 +4,7 @@ const showcaseLoaders = {
   'particle-3d': () => import('../components/showcases/Particle3DShowcase.vue'),
   'isometric-wave': () => import('../components/showcases/IsometricWaveShowcase.vue'),
   'full-screen-navigator': () => import('../components/showcases/FullScreenNavigatorShowcase/index.vue'),
+  'gameplay-album': () => import('../components/showcases/GameplayAlbumShowcase.vue'),
 }
 
 const showcasePromises = new Map()
@@ -160,7 +161,59 @@ export const componentRegistry = [
     component: () => loadShowcase('isometric-wave'),
     preload: () => preloadShowcase('isometric-wave'),
   },
-    {
+  {
+    id: 'gameplay-album',
+    name: 'GameplayAlbum',
+    tag: '<GameplayAlbum>',
+    description: '来自「终末地」的图片轮播组件',
+    features: [
+      '自定义：标题内容+颜色、icon、轮播内容及文案',
+      '入场：支持 blink + reveal 动画（可手动 Reset）',
+      '图片切换：支持方向敏感的 reveal 动画',
+      '支持自适应容器宽度'
+    ],
+    usageBlocks: [
+      {
+        label: 'Configuration',
+        language: 'js',
+        code: `const gameplayConfig = {
+  layout: 'right',
+  title: { en: 'GAMEPLAY', cn: '玩法介绍' },
+  rail: { title: 'GAMEPLAY', color: '#fffa00' },
+  slides: [
+    { title: '探索塔卫二', copy: '...', },
+  ],
+}`,
+      },
+      {
+        label: 'External image and video slides',
+        language: 'js',
+        code: `const slides = [
+  {
+    title: '区域建设',
+    copy: '使用外部图片作为轮播媒体。',
+    media: { type: 'image', src: 'https://cdn.example.com/region.jpg', alt: '区域建设' },
+  },
+  {
+    title: '自动化生产',
+    copy: '使用外部视频作为轮播媒体。',
+    media: { type: 'video', src: 'https://cdn.example.com/factory.mp4', mime: 'video/mp4' },
+  },
+]`,
+      },
+    ],
+    props: [
+      { name: 'layout', type: "'left' | 'right'", default: "'right'", desc: '色块及信息栏所处侧边；left 会镜像整体布局。' },
+      { name: 'title', type: '{ en, cn }', default: "{ en: 'GAMEPLAY', cn: '玩法介绍' }", desc: '顶部英文与中文标题。' },
+      { name: 'icon', type: 'String', default: 'gameplay item SVG', desc: '左/右侧信息图标的资源 URL。' },
+      { name: 'slides', type: 'Array<{ title, copy, media? }>', default: '[]', desc: '轮播标题与文案；media 可选 image/video 外部资源，未传时显示占位图。' },
+      { name: 'rail', type: '{ title, color }', default: "{ title: 'GAMEPLAY', color: '#fffa00' }", desc: '轮播旁纵排标题与色块颜色。' },
+      { name: 'sectionHeight', type: 'Number', default: '104.75', desc: '原型段落高度（rem）；AIC 预设使用 77.25。' },
+    ],
+    component: () => loadShowcase('gameplay-album'),
+    preload: () => preloadShowcase('gameplay-album'),
+  },
+  {
     id: 'full-screen-navigator',
     name: 'FullScreenNavigator',
     tag: '<FullScreenNavigator>',
