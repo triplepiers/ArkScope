@@ -23,3 +23,15 @@
         - `Particle2D`：[明日方舟](https://ak.hypergryph.com/#world) 的 2D 点云（斥力 / 切换）
 
         - `Particle3D`：[终末地](https://endfield.hypergryph.com/#lore) 的 3D 点云（旋转 / 切换）
+
+## 第三方素材声明
+
+本项目包含来自 [明日方舟 · 终末地](https://endfield.hypergryph.com) 的 SVG 和 PNG 素材
+
+- 于本项目中的存储位置：`src/assets`（除 `notuce_placesholder.svg` 外的内容）
+
+- 涉及组件：`GameplayAlbum`、`NoticeCarousel`
+
+- 版权归属：© [2017-2026] [上海鹰角网络科技有限公司]
+
+上述素材不属于本项目开源许可证的范围。所有商标、Logo 和品牌名称均归其原始权利人所有。
