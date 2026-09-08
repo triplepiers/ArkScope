@@ -16,13 +16,17 @@ function onSelect(entry) {
 onMounted(() => {
   void preloadShowcases()
 })
+
+const goToRepo = () => {
+  window.open('https://github.com/triplepiers/ArkScope', '_blank');
+};
 </script>
 
 <template>
   <div class="demo-layout">
     <header class="demo-header">
       <RouterLink to="/" class="demo-back">← HOME</RouterLink>
-      <span class="demo-brand">ARKSCOPE</span>
+      <span class="demo-brand" @click="goToRepo">ARKSCOPE</span>
     </header>
 
     <ComponentSidebar
@@ -69,18 +73,7 @@ onMounted(() => {
   padding: 40px;
 }
 
-.st-brand {
-  position: absolute;
-  z-index: 999;
-  top: 20px;
-  left: 28px;
-  color: var(--yellow);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .16em;
-  padding: .2em .5em;
-  background-color: rgba(0,0,0,.3);
-}
+
 
 .st-display {
   position: absolute;
@@ -250,6 +243,7 @@ onMounted(() => {
 .demo-back:hover { color: var(--yellow); }
 
 .demo-brand {
+  cursor: pointer;
   color: var(--yellow);
   font-size: 11px;
   font-weight: 700;

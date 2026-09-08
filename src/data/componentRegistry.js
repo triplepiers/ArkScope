@@ -1,4 +1,5 @@
 const showcaseLoaders = {
+  'news-list': () => import('../components/showcases/NewsListShowcase.vue'),
   'scramble-title': () => import('../components/showcases/ScrambleTitleShowcase.vue'),
   'particle-2d': () => import('../components/showcases/Particle2DShowcase.vue'),
   'particle-3d': () => import('../components/showcases/Particle3DShowcase.vue'),
@@ -235,6 +236,47 @@ export const componentRegistry = [
     exposed: [{ name: 'reset', params: '()', desc: '重播入场动画。' }, { name: 'go', params: '(index)', desc: '切换至指定公告。' }],
     component: () => loadShowcase('notice-carousel'),
     preload: () => preloadShowcase('notice-carousel'),
+  },
+    {
+    id: 'news-list',
+    name: 'NewsList',
+    tag: '<NewsList>',
+    description: '来自「终末地」公告页的分类列表、组合标题和分页器',
+    features: ['自定义标题 + tags', '适配宽屏 / 窄屏布局'],
+    usage: `<NewsList :records="records" title="公告" :tags="tags" />`,
+    usageBlocks: [
+      { label: '分类标签定义', language: 'js', code: `const tags = ref([
+  { label: '最新', value: 'latest' },
+  { label: '公告', value: 'notices' },
+  { label: '活动', value: 'events' },
+  { label: '新闻', value: 'news' },
+])` },
+      { label: '卡片详情数组', language: 'js', code: `// loadPage({ tab, page, pageSize, signal })
+return {
+  records: [{
+    id: 'notice-001', tab: 'notices',
+    title: '版本更新说明', date: '2026.09.09',
+    image: '/notice.jpg',     // [Optional] 使用占位符
+    href: '/news/notice-001', // [Optional]
+  }],
+  total: 75, // 当前分类总条数，非本页长度
+}` },
+      { label: 'Async data', language: 'vue', code: `<NewsList :load-page="fetchBulletins" />` },
+    ],
+    props: [
+      { name: 'title / titleEn', type: 'String', default: "公告 / News", desc: '可自定义标题' },
+      { name: 'tags', type: 'Array<{ label, value }>', default: '最新 / 公告 / 活动 / 新闻', desc: 'latest 表示全部选项' },
+      { name: 'records', type: 'Array<{ id, tab, title, date, image?, href? }>', default: '[]', desc: '完整数据、自动分类与分页。（无 image 时显示占位图）' },
+      { name: 'loadPage', type: '({ tab, page, pageSize, signal }) => Promise<{ records, total }>', default: 'null', desc: '(可选) 服务端分页，优先于 records。' },
+    ],
+    events: [
+      { name: 'change', payload: '{ tab, page, pageSize, total }', desc: '数据成功加载后触发。' },
+      { name: 'open', payload: 'record', desc: '点击图片返回单条 record、有 href 时打开新标签页' },
+      { name: 'error', payload: 'Error', desc: '请求失败；组件保留上一页并显示重试按钮。' },
+    ],
+    exposed: [{ name: 'reload', params: '()', desc: '重新加载当前页。' }, { name: 'go', params: '(page)', desc: '跳转有效页码，保留分类。' }],
+    component: () => loadShowcase('news-list'),
+    preload: () => preloadShowcase('news-list'),
   },
   {
     id: 'full-screen-navigator',
