@@ -1,0 +1,234 @@
+[
+  {
+    "key": "typhoea",
+    "codename": "Typhoeus",
+    "camp": "罗德岛",
+    "race": "萨卡兹",
+    "rarity": 6,
+    "prof": "assault",
+    "elem": "nature",
+    "avatar": "/assets/endfield/operators/typhoea/avatar.png",
+    "illust": "/assets/endfield/operators/typhoea/illust.png",
+    "name": "提弗洛斯",
+    "intro": "“好故事和好猎手一样，先瞄准的，都是心脏。”\n提弗洛斯，来自罗德岛的荒野猎手，对世界充满好奇，渴望探索那些无人之境，发掘被人遗忘的故事。\n在塔卫二，许多萨米传说已经支离破碎，记得的萨米人所剩无几。提弗洛斯决定一一拜访他们，将那些残破的记忆整理在笔记上。\n来到终末地后，她所追逐的故事不再仅限于失落的传说。她认识了更多朋友，和各地的人们交换着身边发生的故事。\n而她对传说的追逐过程，也是在书写一段属于她的故事。\n终有一日，当她的笔记本被记满，她便会对围在身边的朋友大声讲出：\n“传说不总是久远的……也可以发生在你我身边。”",
+    "cv": {
+      "zh-cn": "皛四白",
+      "ja-jp": "大空直美"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/typhoea/enter.mp4",
+      "idle": "/assets/endfield/operators/typhoea/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "114.75rem",
+        "height": "110.375rem",
+        "left": "calc(50% - 29.6875rem)",
+        "top": "calc(50% - 56.75rem)"
+      }
+    }
+  },
+  {
+    "key": "purrche",
+    "codename": "Purrchena",
+    "camp": "环塔商会",
+    "race": "菲林",
+    "rarity": 5,
+    "prof": "shielder",
+    "elem": "physic",
+    "avatar": "/assets/endfield/operators/purrche/avatar.png",
+    "illust": "/assets/endfield/operators/purrche/illust.png",
+    "name": "噗切娜",
+    "intro": "“又到我……‘你好。’……呃，怎么又睡着了！”\n热爱点心的噗切娜是超域环境影响综合征救助基金会的形象代言人。她在环塔商会的引荐下，加入了终末地工业商务办公室，成为终末地工业与环塔商会在超域综合征领域上的联络人。\n当噗切娜第一次出现在大众视野中时，她从人们给予她的关爱中，看见了自己肩上的重担；但当她真正成为基金会的形象代言人，站在了超域综合征患者们之中后，她又感觉到自己能做的事情十分有限。即便超域综合征使她经常突然陷入沉睡，她也总是在苏醒后，带着所有人凝聚在她身上的喜爱，四处奔走。噗切娜用自己的方式，让微笑始终挂在其他被救助的患者们脸上。\n“棉花糖、怪味鳞干……嗯，可以出发了！”",
+    "cv": {
+      "zh-cn": "韩娇娇",
+      "ja-jp": "井泽诗织"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/purrche/enter.mp4",
+      "idle": "/assets/endfield/operators/purrche/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "106.5625rem",
+        "height": "103.8125rem",
+        "left": "calc(50% - 24.75rem)",
+        "top": "calc(50% - 54.1875rem)"
+      }
+    }
+  },
+  {
+    "key": "endministrator2",
+    "codename": "Endministrator",
+    "camp": "终末地工业",
+    "race": "未公开",
+    "rarity": 6,
+    "prof": "guard",
+    "elem": "physic",
+    "avatar": "/assets/endfield/operators/endministrator2/avatar.png",
+    "illust": "/assets/endfield/operators/endministrator2/illust.png",
+    "name": "管理员",
+    "intro": "终末地工业的“管理员”。 在塔卫二有文字记载的历史上，管理员是文明重要的保护者之一，曾多次在星球居民面临重大灾难时挺身而出，也因此留下了许多故事（以及传说，乃至流言）。 但真正的管理员本人仍是一个无比神秘的人物，很少有人亲眼见过管理员。 文明环带的大小阵营和组织普遍知晓终末地工业有着这样一张十分特别的“底牌”，但也仅限于此。 管理员对源石和协议网络掌控的本质，和其必要的定期沉睡，是终末地工业最重要的秘密之一。",
+    "cv": {
+      "zh-cn": "杨超然",
+      "ja-jp": "津田拓也"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/endministrator2/enter.mp4",
+      "idle": "/assets/endfield/operators/endministrator2/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "95.625rem",
+        "height": "110.9375rem",
+        "left": "calc(50% - 21.75rem)",
+        "top": "calc(50% - 57.9375rem)"
+      }
+    }
+  },
+  {
+    "key": "endministrator1",
+    "codename": "Endministrator",
+    "camp": "终末地工业",
+    "race": "未公开",
+    "rarity": 6,
+    "prof": "guard",
+    "elem": "physic",
+    "avatar": "/assets/endfield/operators/endministrator1/avatar.png",
+    "illust": "/assets/endfield/operators/endministrator1/illust.png",
+    "name": "管理员",
+    "intro": "终末地工业的“管理员”。 在塔卫二有文字记载的历史上，管理员是文明重要的保护者之一，曾多次在星球居民面临重大灾难时挺身而出，也因此留下了许多故事（以及传说，乃至流言）。 但真正的管理员本人仍是一个无比神秘的人物，很少有人亲眼见过管理员。 文明环带的大小阵营和组织普遍知晓终末地工业有着这样一张十分特别的“底牌”，但也仅限于此。 管理员对源石和协议网络掌控的本质，和其必要的定期沉睡，是终末地工业最重要的秘密之一。",
+    "cv": {
+      "zh-cn": "木雅瑞林",
+      "ja-jp": "橘杏咲"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/endministrator1/enter.mp4",
+      "idle": "/assets/endfield/operators/endministrator1/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "95.625rem",
+        "height": "110.9375rem",
+        "left": "calc(50% - 22.8125rem)",
+        "top": "calc(50% - 57.875rem)"
+      }
+    }
+  },
+  {
+    "key": "perlica",
+    "codename": "Perlica",
+    "camp": "终末地工业",
+    "race": "黎博利",
+    "rarity": 5,
+    "prof": "caster",
+    "elem": "electric",
+    "avatar": "/assets/endfield/operators/perlica/avatar.png",
+    "illust": "/assets/endfield/operators/perlica/illust.png",
+    "name": "佩丽卡",
+    "intro": "“我们曾这样不断抵抗……期待着你能再一次归来。” 佩丽卡，终末地工业的监督和官方发言人，主要负责管理和推进协议源石技术的开发和应用，同时也承担帝江号的管理工作。 作为一位杰出的协议技术专家，她的专业成果对于这种技术的适应性发展及其进一步应用产生了重要的影响，并推动了集成工业系统的完善。 佩丽卡能够果断且冷静地应对各种危机，但终末地工业所面临的挑战总是超出预期。在管理员休眠期间，她正式接管了危机处理小组的指挥权，领导终末地工业的“英雄们”为了一个无私的目标而战。她来回奔波于文明环带的各处，为终末地的平稳发展竭尽全力。 \n “只有徒步行走在这片大地上，我们才能感受到生命的气息……这也是终末地战斗的意义。”",
+    "cv": {
+      "zh-cn": "陈婷婷",
+      "ja-jp": "若山诗音"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/perlica/enter.mp4",
+      "idle": "/assets/endfield/operators/perlica/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "105rem",
+        "height": "101.4375rem",
+        "left": "calc(50% - 32.4375rem)",
+        "top": "calc(50% - 54.5625rem)"
+      }
+    }
+  },
+  {
+    "key": "chen",
+    "codename": "Chen Qianyu",
+    "camp": "终末地工业",
+    "race": "龙",
+    "rarity": 5,
+    "prof": "guard",
+    "elem": "physic",
+    "avatar": "/assets/endfield/operators/chen/avatar.png",
+    "illust": "/assets/endfield/operators/chen/illust.png",
+    "name": "陈千语",
+    "intro": "“看来我不只在武学上有天赋嘛，当你的干员是不是也是一把好手？” 陈千语是终末地工业的干员，是危机处理小组的核心成员之一。 她自幼接受母亲和谈剑堂的教导，磨练武艺。刻苦的训练不仅让她收获了过硬的战斗素养，还练就了同龄人中少有的心理素质。尽管从未亲眼见过那把传说中的赤霄剑，陈千语还是以自己独创的“赤霄剑法”为荣，行侠仗义。 只身仗剑游历塔卫二数年后，陈千语在佩丽卡的邀请下加入了终末地。作为天生的乐天派，陈千语以饱满的热情介入一切亟需解决的困难。 \n “管理员，我曾听说，妈妈的剑能碰触到天上的云彩。我会做到的，然后，成为你和佩丽卡最信任的人！”",
+    "cv": {
+      "zh-cn": "吱毛",
+      "ja-jp": "铃代纱弓"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/chen/enter.mp4",
+      "idle": "/assets/endfield/operators/chen/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "105.875rem",
+        "height": "94.6875rem",
+        "left": "calc(50% - 32.3125rem)",
+        "top": "calc(50% - 51.125rem)"
+      }
+    }
+  },
+  {
+    "key": "lizhiyan",
+    "codename": "Arcane",
+    "camp": "宏山科学院",
+    "race": "黎博利",
+    "rarity": 6,
+    "prof": "caster",
+    "elem": "nature",
+    "avatar": "/assets/endfield/operators/lizhiyan/avatar.png",
+    "illust": "/assets/endfield/operators/lizhiyan/illust.png",
+    "name": "诀",
+    "intro": "“定不辱应龙之名。”\n应龙特勤队行动队长，诀。长期驻守应龙关，多次执行高危险的禁区勘测任务。为人严肃认真，不苟言笑。\n北部禁区的灾难夺走了诀的一切，从那以后，她便只为一个目标而活——遏制武陵甚大裂隙。她一次次地深入那里，仇恨推着她一步步迈入深渊，又支撑着她从绝境中幸存。\n你能在诀的身上看到一名应龙特勤队员应有的全部品质，对命令的绝对服从、卓越的战术指挥、不分昼夜的刻苦训练，以及百折不挠的信念。对那些同样因灾难失去亲人的人而言，他们都能从诀身上瞥见一部分自己……\n总有人觉得她过于冰冷，但对于应龙队员来说，不与人靠得太近，也是一种对彼此的保护。\n“心如铸铁，行如剑锋。应龙的战法重在其势。”",
+    "cv": {
+      "zh-cn": "唐雅菁",
+      "ja-jp": "Lynn"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/lizhiyan/enter.mp4",
+      "idle": "/assets/endfield/operators/lizhiyan/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "110rem",
+        "height": "96.875rem",
+        "left": "calc(50% - 31.25rem)",
+        "top": "calc(50% - 47.3125rem)"
+      }
+    }
+  },
+  {
+    "key": "liino",
+    "codename": "Liino",
+    "camp": "环塔商会",
+    "race": "萨卡兹",
+    "rarity": 6,
+    "prof": "support",
+    "elem": "electric",
+    "avatar": "/assets/endfield/operators/liino/avatar.png",
+    "illust": "/assets/endfield/operators/liino/illust.png",
+    "name": "梨诺",
+    "intro": "“Twinkle-twinkle！新的演出马上开始！”\n梨诺，来自环塔商会的新锐偶像，自出道后便深受众人的喜爱，人称“菈梵朵玛的晨星”。她以精湛的演唱技巧与独特的演出风格著称，时常将富有挑战、突破传统的表演内容融入自己的演唱会中。\n她总能让观众收获独一无二的观看体验，也总能让那些大公司心甘情愿地赞助她的每场演出。尽管萨卡兹笞心魔的身份为她的急速走红带来了非议，但每个看过她演出的人总会被这位耀眼的少女吸引。\n如今，梨诺正有条不紊地推进自己的环塔卫二巡回演唱会计划。她相信自己必定会创造出更别开生面的舞台，也相信自己终有一天能成为世界顶端最闪耀的那颗星。\n“好感动！我该怎么答谢这份信赖才好……唔，再多给你几张下次演出的门票，怎么样？”",
+    "cv": {
+      "zh-cn": "多多poi",
+      "ja-jp": "佐佐木李子"
+    },
+    "video": {
+      "enter": "/assets/endfield/operators/liino/enter.mp4",
+      "idle": "/assets/endfield/operators/liino/idle.mp4"
+    },
+    "layout": {
+      "landscape": {
+        "width": "111.875rem",
+        "height": "107.1875rem",
+        "left": "calc(50% - 36.8125rem)",
+        "top": "calc(50% - 53.5625rem)"
+      }
+    }
+  }
+]

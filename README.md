@@ -18,6 +18,8 @@
         
         - `NoticeCarousel`：[终末地](https://endfield.hypergryph.com/#notice) 的版本公告轮播图组件（附带 Reveal & Blink）
 
+        - `OperatorCarousel`：[终末地](https://endfield.hypergryph.com/#operator) 的干员轮播图组件（附带干员列表翻页、Blink 切换）
+
         - `FullScreenNavigator`：[明日方舟](https://ak.hypergryph.com) 的全屏滚动 Section 切换（附带 Section + 标题 的 Reveal 动画，滚动方向敏感）
     
     - 粒子效果
@@ -39,7 +41,7 @@
 
 - 于本项目中的存储位置：`src/assets`（除 `notuce_placesholder.svg` 外的内容）
 
-- 涉及组件：`GameplayAlbum`、`NoticeCarousel`
+- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`
 
 - 版权归属：© [2017-2026] [上海鹰角网络科技有限公司]
 

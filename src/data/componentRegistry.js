@@ -1,4 +1,5 @@
 const showcaseLoaders = {
+  'operator-carousel': () => import('../components/showcases/OperatorCarouselShowcase.vue'),
   'news-list': () => import('../components/showcases/NewsListShowcase.vue'),
   'scramble-title': () => import('../components/showcases/ScrambleTitleShowcase.vue'),
   'particle-2d': () => import('../components/showcases/Particle2DShowcase.vue'),
@@ -221,7 +222,7 @@ export const componentRegistry = [
     tag: '<NoticeCarousel>',
     description: '来自「终末地」的公告卡片轮播组件',
     features: [
-      '入场 reveal / blink 动画（支持 Reset）', 
+      '入场 reveal / blink 动画（支持 Reset）',
       '自定义：图片 + 标题列表',
       '窄屏时保留标题与侧边装饰'
     ],
@@ -237,7 +238,57 @@ export const componentRegistry = [
     component: () => loadShowcase('notice-carousel'),
     preload: () => preloadShowcase('notice-carousel'),
   },
-    {
+  {
+    id: 'operator-carousel',
+    name: 'OperatorCarousel',
+    tag: '<OperatorCarousel>',
+    description: '来自「终末地」的干员轮播图组件，包含循环头像栏、档案 / 2D / 3D 动态立绘切换',
+    features: ['头像列表独立滚动；点击头像切换详情', '文字淡出淡入、2D 横向缓动、3D 入场转待机循环'],
+    usage: `<OperatorCarousel :operators="operators" @change="onChange" />`,
+    usageBlocks: [
+      { label: '使用组件', language: 'vue', code: `<OperatorCarousel :operators="operators" :initial-index="0" />` },
+      {
+        label: 'Operators 数组示例', language: 'js', code: `const operators = [
+  {
+    key: 'typhoea', // 唯一且稳定；数组顺序决定头像顺序
+    name: '提弗洛斯',
+    codename: 'Typhoeus',
+    camp: '罗德岛',
+    race: '萨卡兹',
+    rarity: 6, // 显示的星数
+    prof: 'assault', // 对应 icons/assault.jpg
+    elem: 'nature', // 对应 icons/nature.jpg
+    intro: '“好故事和好猎手一样，先瞄准的，都是心脏。”\\n提弗洛斯，来自罗德岛的荒野猎手。',
+    cv: { 'zh-cn': '皛四白', 'ja-jp': '大空直美' },
+    avatar: '/assets/endfield/operators/typhoea/avatar.png',
+    illust: '/assets/endfield/operators/typhoea/illust.png',
+    video: {
+      enter: '/assets/endfield/operators/typhoea/enter.mp4',
+      idle: '/assets/endfield/operators/typhoea/idle.mp4',
+    },
+    layout: {
+      landscape: {
+        width: '114.75rem',
+        height: '110.375rem',
+        left: 'calc(50% - 29.6875rem)',
+        top: 'calc(50% - 56.75rem)',
+      },
+    },
+  },
+]` }],
+    props: [
+      { name: 'operators', type: 'Array<Operator>', default: '[]', desc: '干员文案、头像、2D 图、3D 视频与立绘布局参数' },
+      { name: 'initialIndex', type: 'Number', default: '0', desc: '初始选中干员的零基索引。' },
+    ],
+    events: [
+      { name: 'change', payload: '{ index, operator }', desc: '头像点击后触发；单纯滚动列表不改变详情。' },
+      { name: 'mode-change', payload: "'2d' | '3d'", desc: '切换立绘模式。' },
+    ],
+    exposed: [{ name: 'select', params: '(index)', desc: '按索引切换干员，支持循环取模。' }],
+    component: () => loadShowcase('operator-carousel'),
+    preload: () => preloadShowcase('operator-carousel'),
+  },
+  {
     id: 'news-list',
     name: 'NewsList',
     tag: '<NewsList>',
@@ -245,13 +296,15 @@ export const componentRegistry = [
     features: ['自定义标题 + tags', '适配宽屏 / 窄屏布局'],
     usage: `<NewsList :records="records" title="公告" :tags="tags" />`,
     usageBlocks: [
-      { label: '分类标签定义', language: 'js', code: `const tags = ref([
+      {
+        label: '分类标签定义', language: 'js', code: `const tags = ref([
   { label: '最新', value: 'latest' },
   { label: '公告', value: 'notices' },
   { label: '活动', value: 'events' },
   { label: '新闻', value: 'news' },
 ])` },
-      { label: '卡片详情数组', language: 'js', code: `// loadPage({ tab, page, pageSize, signal })
+      {
+        label: '卡片详情数组', language: 'js', code: `// loadPage({ tab, page, pageSize, signal })
 return {
   records: [{
     id: 'notice-001', tab: 'notices',
