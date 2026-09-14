@@ -1,4 +1,5 @@
 const showcaseLoaders = {
+  'endfield-sidebar': () => import('../components/showcases/EndfieldSidebarShowcase.vue'),
   'operator-carousel': () => import('../components/showcases/OperatorCarouselShowcase.vue'),
   'news-list': () => import('../components/showcases/NewsListShowcase.vue'),
   'scramble-title': () => import('../components/showcases/ScrambleTitleShowcase.vue'),
@@ -28,6 +29,53 @@ export function preloadShowcases() {
 }
 
 export const componentRegistry = [
+  {
+    id: 'endfield-sidebar',
+    category: 'navigation',
+    project: '终末地',
+    name: 'EndfieldSidebar',
+    tag: '<EndfieldSidebar>',
+    description: '来自「终末地」官网的左侧导航栏，支持 hover 展开与点击滚动',
+    usageBlocks: [
+      {
+        label: '菜单配置', language: 'js', code: `import { ref } from 'vue'
+import customIcon from './my-icon.svg'
+
+const activeId = ref('intro')
+const items = [
+  { id: 'intro', label: '介绍', icon: 'home', link: '#intro' },
+  { id: 'details', label: '详情', icon: customIcon, link: '#details' },
+]
+
+// 设为 [] 时不挂载副菜单区域
+const secondaryItems = [
+  { id: 'account', label: '个人中心', icon: 'user', link: '/account' },
+]`,
+      },
+      {
+        label: '组件绑定', language: 'vue', code: `<EndfieldSidebar
+  v-model="activeId"
+  :items="items"
+  :secondary-items="secondaryItems"
+  action-label="立即探索"
+  @action="handleAction"
+/>`,
+      },
+    ],
+    props: [
+      { name: 'modelValue', type: 'String', default: "'home'", desc: '当前区块 ID；滚动时由使用方更新。' },
+      { name: 'items', type: 'Array<{ id, label, icon, link? }>', default: '官网导航项', desc: '主菜单；icon 支持内置名称或图片 URL，link 支持 #元素ID 或页面 URL。' },
+      { name: 'secondaryItems', type: 'Array<{ id, label, icon, link?, pressed? }>', default: '[]', desc: '副菜单；空数组时不挂载工具区域。pressed 用于切换按钮的无障碍状态。' },
+      { name: 'actionLabel', type: 'String', default: "'前往游戏'", desc: '底部主按钮文案。' },
+    ],
+    events: [
+      { name: 'update:modelValue', payload: '区块 ID', desc: '点击主菜单时更新选中项。' },
+      { name: 'select', payload: '{ id, label, icon, link? }', desc: '点击主菜单或 Logo；存在有效 #元素ID 时自动平滑滚动。' },
+      { name: 'action', payload: "副菜单项 ID | 'play'", desc: '点击副菜单或底部主按钮；实际业务由使用方接入。' },
+    ],
+    component: () => loadShowcase('endfield-sidebar'),
+    preload: () => preloadShowcase('endfield-sidebar'),
+  },
   {
     id: 'scramble-title',
     category: 'effects',
@@ -192,6 +240,7 @@ export const componentRegistry = [
         code: `const gameplayConfig = {
   layout: 'right',
   title: { en: 'GAMEPLAY', cn: '玩法介绍' },
+
   rail: { title: 'GAMEPLAY', color: '#fffa00' },
   slides: [
     { title: '探索塔卫二', copy: '...', },
@@ -353,7 +402,7 @@ return {
     project: '明日方舟',
     name: 'FullScreenNavigator',
     tag: '<FullScreenNavigator>',
-    description: '来着「明日方舟」的分段全屏滚动控制器',
+    description: '来自「明日方舟」的分段全屏滚动控制器',
     features: [
       '离散全屏滚动：向上/下会应用镜像 reveal 入场动画',
       '最后一个 section 与 footer 合并为自由滚动',

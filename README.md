@@ -6,6 +6,8 @@
 
 - 提供组件一览：
 
+    - `EndfieldSidebar`：[终末地](https://endfield.hypergryph.com/) 导航栏（悬停展开、支持移动端）
+
     - `ScrambleTitle`：[塞壬唱片](https://monster-siren.hypergryph.com/music#album) 的文字解码组件
 
     - `IsometricWave`：「[莱茵生命 · 访问](https://www.bilibili.com/list/161775300?oid=768610733&bvid=BV1rr4y1b7sz)」PV 里的类亚克力质感 Hover 交互（实际上完全不亚克力呢）
@@ -41,7 +43,7 @@
 
 - 于本项目中的存储位置：`src/assets`（除 `notuce_placesholder.svg` 外的内容）
 
-- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`
+- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`、`EndfieldSidebar`
 
 - 版权归属：© [2017-2026] [上海鹰角网络科技有限公司]
 

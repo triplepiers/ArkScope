@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import { loadDemoPage } from './loaders.js'
 
 const routes = [
+  { path: '/demo/endfield-sidebar', name: 'endfield-sidebar-demo', component: () => import('../components/showcases/EndfieldSidebarShowcase.vue') },
   { path: '/demo/operator-carousel', name: 'operator-carousel-demo', component: () => import('../components/showcases/OperatorCarouselShowcase.vue') },
   { path: '/demo/news-list', name: 'news-list-demo', component: () => import('../components/showcases/NewsListShowcase.vue') },
   { path: '/', name: 'home', component: HomePage },
