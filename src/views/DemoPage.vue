@@ -212,7 +212,7 @@ const goToRepo = () => {
 <style scoped>
 .demo-layout {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 280px 1fr;
   grid-template-rows: 44px 1fr;
   height: 100vh;
   background: var(--bg);

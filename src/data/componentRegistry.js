@@ -30,6 +30,8 @@ export function preloadShowcases() {
 export const componentRegistry = [
   {
     id: 'scramble-title',
+    category: 'effects',
+    project: '塞壬唱片',
     name: 'ScrambleTitle',
     tag: '<ScrambleTitle>',
     description: '来自「塞壬唱片」的逐字符解码动画：文字先展开为占位符，再从左到右经历随机替换为字符池（中/日/英）文本，最终稳定为真实文本。',
@@ -61,6 +63,8 @@ export const componentRegistry = [
   },
   {
     id: 'particle-2d',
+    category: 'effects',
+    project: '明日方舟',
     name: 'Particle2D',
     tag: '<Particle2DMaskController>',
     description: '来自「明日方舟」的 2D 粒子点云：基于 Three.js 绘制、支持鼠标斥力交互 + 自定义图片上传。',
@@ -98,6 +102,8 @@ export const componentRegistry = [
   },
   {
     id: 'particle-3d',
+    category: 'effects',
+    project: '终末地',
     name: 'Particle3D',
     tag: '<Particle3DMaskController>',
     description: '来自「终末地」的 3D 粒子点云：基于 Three.js 绘制、支持鼠标拖动旋转、妙妙过渡效果 + 自定义 GLB/GLTF 上传（其实图片也行）。',
@@ -132,6 +138,8 @@ export const componentRegistry = [
   },
   {
     id: 'isometric-wave',
+    category: 'effects',
+    project: '明日方舟',
     name: 'IsometricWave',
     tag: '<IsometricWave>',
     description: '模仿「莱茵生命·访问」中的数据检索 UI：SVG 等距斜切矩形阵列，鼠标经过时形成弹性波峰。',
@@ -166,6 +174,8 @@ export const componentRegistry = [
   },
   {
     id: 'gameplay-album',
+    category: 'display',
+    project: '终末地',
     name: 'GameplayAlbum',
     tag: '<GameplayAlbum>',
     description: '来自「终末地」的图片轮播组件',
@@ -218,6 +228,8 @@ export const componentRegistry = [
   },
   {
     id: 'notice-carousel',
+    category: 'display',
+    project: '终末地',
     name: 'NoticeCarousel',
     tag: '<NoticeCarousel>',
     description: '来自「终末地」的公告卡片轮播组件',
@@ -240,6 +252,8 @@ export const componentRegistry = [
   },
   {
     id: 'operator-carousel',
+    category: 'display',
+    project: '终末地',
     name: 'OperatorCarousel',
     tag: '<OperatorCarousel>',
     description: '来自「终末地」的干员轮播图组件，包含循环头像栏、档案 / 2D / 3D 动态立绘切换',
@@ -290,6 +304,8 @@ export const componentRegistry = [
   },
   {
     id: 'news-list',
+    category: 'display',
+    project: '终末地',
     name: 'NewsList',
     tag: '<NewsList>',
     description: '来自「终末地」公告页的分类列表、组合标题和分页器',
@@ -333,6 +349,8 @@ return {
   },
   {
     id: 'full-screen-navigator',
+    category: 'navigation',
+    project: '明日方舟',
     name: 'FullScreenNavigator',
     tag: '<FullScreenNavigator>',
     description: '来着「明日方舟」的分段全屏滚动控制器',
