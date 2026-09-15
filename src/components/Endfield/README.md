@@ -2,6 +2,29 @@
 
 以下路径均相对本目录 `src/components/Endfield/`。资源路径中的 `@` 指向 `src`。
 
+## EndfieldBanner · 横幅
+
+路径：`Banner/index.vue`
+
+- `layout: String = 'news-list'`：可选 `news-list`（公告页组合标题）或 `lore`（官网 LORE 黄色分隔横幅），各自使用独立布局与默认图片。
+- `title: String`：主标题；未传时，`news-list` 显示「公告」，`lore` 显示「LORE」。
+- `titleEn: String = 'News'`：仅用于 `news-list` 的英文标签。
+- `subtitle: String = 'ARKNIGHTS: ENDFIELD'`：仅用于 `lore` 的副标题。
+- `image: String = ''`：覆盖布局的默认主图，传入图片 URL。
+- `mobileImage: String = ''`：紧凑布局的主图；优先于 `image`，未传时沿用 `image` 或布局默认图。
+- `compact: Boolean = false`：由调用方启用窄屏布局；NewsList 会切换默认主图，LORE 会缩小主图并将文字右对齐。
+- `active: Boolean = true`：仅用于 `lore`；由 `false` 切换到 `true` 时播放官网滑入动画，默认直接显示。
+- CSS 变量 `--banner-unit`：缩放单位，默认继承 `--news-unit`，否则为 `8px`；在组件上覆盖。
+- CSS 变量 `--banner-content`：NewsList 内容宽度，默认继承 `--news-content`，否则为 `90%`。
+- CSS 变量 `--banner-height`：覆盖横幅高度；NewsList 默认为 `31.625` 个缩放单位，紧凑模式为 `19.375`；LORE 黄色条为 `9.125`，另预留顶部插画空间（普通 `5.125`、紧凑 `3.7` 个单位）。
+
+NewsList 自动引用 `@/assets/endfield/news-list/` 的标题装饰与桌面／移动端主图；LORE 使用 `@/assets/endfield/banner/lore.png`。字体来自 `@/assets/fonts/endfield/`。
+
+```vue
+<EndfieldBanner layout="news-list" title="公告" />
+<EndfieldBanner layout="lore" />
+```
+
 ## IconTextButton · 图标文字按钮
 
 路径：`Buttons/IconTextButton.vue`

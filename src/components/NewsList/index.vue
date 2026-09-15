@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import NewsHeader from './NewsHeader.vue'
+import EndfieldBanner from '@/components/Endfield/Banner/index.vue'
 import NewsTabs from '@/components/Endfield/Tabs/index.vue'
 import NewsBlock from './NewsBlock.vue'
 import NewsPagination from '@/components/Endfield/Pagination/index.vue'
@@ -99,7 +99,7 @@ defineExpose({ reload: () => load(page.value), go })
 <template>
   <section ref="root" class="news-list" aria-label="公告栏目">
     <div class="nl-surface">
-      <NewsHeader :title="title" :title-en="titleEn" :compact="compact" />
+      <EndfieldBanner layout="news-list" :title="title" :title-en="titleEn" :compact="compact" />
       <div class="nl-content">
         <NewsTabs :tags="tags" :model-value="tab" :disabled="busy" @update:model-value="selectTab" />
         <div class="nl-results" :aria-busy="busy">

@@ -46,7 +46,7 @@
 | 文件 | 职责 |
 | --- | --- |
 | `index.vue` | 容器布局、分类/页码状态、数据加载和响应式切换 |
-| `NewsHeader.vue` | SVG + PNG + 可配置中文/英文标题 |
+| `../Endfield/Banner/index.vue` | Banner 的 news-list 布局，支持中文/英文标题；另提供 lore 布局 |
 | `../Endfield/Tabs/index.vue` | 可配置分类、选中/hover 动画、方向键/Home/End |
 | `NewsBlock.vue` | 当前页卡片网格、图片占位/失败回退、详情链接 |
 | `../Endfield/Pagination/index.vue` | 前后页、4 格滑动页码、窄屏当前页/总页数 |
