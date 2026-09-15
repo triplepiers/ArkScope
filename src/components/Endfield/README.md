@@ -2,6 +2,65 @@
 
 以下路径均相对本目录 `src/components/Endfield/`。资源路径中的 `@` 指向 `src`。
 
+## OperatorList · 干员筛选列表
+
+路径：`OperatorList/index.vue`
+
+- `operators: Array = []`：干员数据，每项包含唯一 `key`、`name`、`codename`、`prof`、`elem`、`rarity`、可选的 `portrait` 图片 URL。重复预览记录也需要不同的 `key`。
+- `prof`：`guard`（近卫）、`caster`（术师）、`support`（辅助）、`shielder`（重装）、`vanguard`（先锋）、`assault`（突击）。
+- `elem`：`fire`（灼热）、`ice`（寒冷）、`electric`（电磁）、`nature`（自然）、`physic`（物理）。
+- `rarity`：`4`、`5`、`6` 对应紫色、黄色、橙色卡片底边。
+- `filter-change({ profession, element, count })`：切换筛选时触发，空字符串表示不限；两类条件取交集，筛选后列表回到顶部。
+- CSS 变量 `--operator-list-height`：组件高度，默认 `100dvh`，最小高度 `360px`。宽度跟随容器，宽度不超过 `700px` 时改为三列布局。
+
+卡片支持 hover 上浮，不提供点击跳转。滚动仅发生在卡片区域。演示数据见 `@/data/operatorList.json`（7 名干员覆盖全部职业与属性）；装饰与卡面来自 `/assets/endfield/operator-list/`，字体及类别图标复用 `/assets/endfield/operators/`。
+
+`operators` 数组样例：
+
+```js
+const operators = [
+  {
+    key: 'typhoea',
+    name: '提弗洛斯',
+    codename: 'Typhoeus',
+    prof: 'assault', // guard | caster | support | shielder | vanguard | assault
+    elem: 'nature',  // fire | ice | electric | nature | physic
+    rarity: 6,
+    portrait: '/assets/endfield/operator-list/typhoea.png',
+  },
+  {
+    key: 'purrche',
+    name: '噗切娜',
+    codename: 'Purrchena',
+    prof: 'shielder',
+    elem: 'physic',
+    rarity: 5,
+    portrait: '/assets/endfield/operator-list/purrche.png',
+  },
+]
+```
+
+## OperatorCard · 干员卡片
+
+路径：`OperatorList/OperatorCard.vue`
+
+- `operator: Object`：必填，数据格式同 OperatorList 单条记录。
+- `index: Number`：从 `0` 开始的显示序号。
+- `total: Number`：显示的总条数。
+
+尺寸随父级 `font-size` 缩放，宽 `19em`、高 `24.25em`；列表内部提供配套字体。
+
+## IconSelect · 图标下拉筛选
+
+路径：`Dropdowns/IconSelect.vue`
+
+- `label: String`：必填，触发按钮和筛选列表的名称。
+- `options: Array<{ value, label, icon }> = []`：选项标识、文字和图标 URL；组件自动增加空值的「不限」选项。
+- `modelValue: String = ''`：当前选项，使用 `v-model` 绑定，空字符串表示不限。
+- `update:modelValue(value)`：选择选项时触发。
+
+支持方向键、Home / End、Enter / Space、Escape 及点击外部关闭；宽度 `18.9375em`，随父级字号缩放。默认箭头及不限图标来自 `/assets/endfield/operator-list/`。
+
 ## EndfieldBanner · 横幅
 
 路径：`Banner/index.vue`

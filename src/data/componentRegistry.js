@@ -1,4 +1,5 @@
 const showcaseLoaders = {
+  'operator-list': () => import('../components/showcases/OperatorListShowcase.vue'),
   'endfield-sidebar': () => import('../components/showcases/EndfieldSidebarShowcase.vue'),
   'operator-carousel': () => import('../components/showcases/OperatorCarouselShowcase.vue'),
   'news-list': () => import('../components/showcases/NewsListShowcase.vue'),
@@ -29,6 +30,21 @@ export function preloadShowcases() {
 }
 
 export const componentRegistry = [
+  {
+    id: 'operator-list',
+    category: 'display',
+    project: '终末地',
+    name: 'OperatorList',
+    tag: '<OperatorList>',
+    description: '来自「终末地」干员页的职业 / 属性筛选与可滚动卡片列表，不含侧栏、页脚和详情跳转。',
+    usage: `<OperatorList :operators="operators" @filter-change="onFilterChange" />`,
+    props: [
+      { name: 'operators', type: 'Array<{ key, name, codename, prof, elem, rarity, portrait? }>', default: '[]', desc: '本地干员数据；key 唯一。预览用 7 名干员重复 5 组，覆盖全部职业与属性。' },
+    ],
+    events: [{ name: 'filter-change', payload: '{ profession, element, count }', desc: '职业和属性取交集，空字符串代表全部。' }],
+    component: () => loadShowcase('operator-list'),
+    preload: () => preloadShowcase('operator-list'),
+  },
   {
     id: 'endfield-sidebar',
     category: 'navigation',

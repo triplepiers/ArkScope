@@ -1,0 +1,65 @@
+[
+  {
+    "key": "typhoea",
+    "name": "提弗洛斯",
+    "codename": "Typhoeus",
+    "prof": "assault",
+    "elem": "nature",
+    "rarity": 6,
+    "portrait": "/assets/endfield/operator-list/typhoea.png"
+  },
+  {
+    "key": "purrche",
+    "name": "噗切娜",
+    "codename": "Purrchena",
+    "prof": "shielder",
+    "elem": "physic",
+    "rarity": 5,
+    "portrait": "/assets/endfield/operator-list/purrche.png"
+  },
+  {
+    "key": "endministrator2",
+    "name": "管理员",
+    "codename": "Endministrator",
+    "prof": "guard",
+    "elem": "physic",
+    "rarity": 6,
+    "portrait": "/assets/endfield/operator-list/endministrator2.png"
+  },
+  {
+    "key": "perlica",
+    "name": "佩丽卡",
+    "codename": "Perlica",
+    "prof": "caster",
+    "elem": "electric",
+    "rarity": 5,
+    "portrait": "/assets/endfield/operator-list/perlica.png"
+  },
+  {
+    "key": "liino",
+    "name": "梨诺",
+    "codename": "Liino",
+    "prof": "support",
+    "elem": "electric",
+    "rarity": 6,
+    "portrait": "/assets/endfield/operator-list/liino.png"
+  },
+  {
+    "key": "akekuri",
+    "name": "秋栗",
+    "codename": "Akekuri",
+    "prof": "vanguard",
+    "elem": "fire",
+    "rarity": 4,
+    "portrait": "/assets/endfield/operator-list/akekuri.png"
+  },
+  {
+    "key": "tangtang",
+    "name": "汤汤",
+    "codename": "Tangtang",
+    "prof": "caster",
+    "elem": "ice",
+    "rarity": 6,
+    "portrait": "/assets/endfield/operator-list/tangtang.png"
+  }
+]
