@@ -13,7 +13,7 @@
 - `filter-change({ profession, element, count })`：切换筛选时触发，空字符串表示不限；两类条件取交集，筛选后列表回到顶部。
 - CSS 变量 `--operator-list-height`：组件高度，默认 `100dvh`，最小高度 `360px`。宽度跟随容器，宽度不超过 `700px` 时改为三列布局。
 
-卡片支持 hover 上浮，不提供点击跳转。滚动仅发生在卡片区域。演示数据见 `@/data/operatorList.json`（7 名干员覆盖全部职业与属性）；装饰与卡面来自 `/assets/endfield/operator-list/`，字体及类别图标复用 `/assets/endfield/operators/`。
+卡片支持 hover 上浮，不提供点击跳转。滚动仅发生在卡片区域。组件会去重预载卡面、职业/属性图标和 `portrait`，加载期间显示进度层，失败资源也会正常结束 loading。演示数据见 `@/data/operatorList.json`（7 名干员覆盖全部职业与属性）；装饰与卡面来自 `/assets/endfield/operator-list/`，字体及类别图标复用 `/assets/endfield/operators/`。
 
 `operators` 数组样例：
 
@@ -60,6 +60,16 @@ const operators = [
 - `update:modelValue(value)`：选择选项时触发。
 
 支持方向键、Home / End、Enter / Space、Escape 及点击外部关闭；宽度 `18.9375em`，随父级字号缩放。默认箭头及不限图标来自 `/assets/endfield/operator-list/`。
+
+## AssetLoadingOverlay · 资源加载层
+
+路径：`Loaders/AssetLoadingOverlay.vue`
+
+- `visible: Boolean`：控制加载层显示。
+- `label: String = 'LOADING'`：状态文字。
+- `progress: Number | null = null`：`0–1` 的加载比例；`null` 时不显示百分比。
+- `tone: String = 'light'`：`light` 或 `dark` 背景色调。
+- `compact: Boolean = false`：使用无背景的小型状态，适合局部媒体加载。
 
 ## EndfieldBanner · 横幅
 

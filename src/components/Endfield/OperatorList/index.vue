@@ -1,6 +1,8 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useAssetPreloader } from '@/composables/useAssetPreloader'
 import IconSelect from '../Dropdowns/IconSelect.vue'
+import AssetLoadingOverlay from '../Loaders/AssetLoadingOverlay.vue'
 import OperatorCard from './OperatorCard.vue'
 import { professions, elements, filterOperators } from './operatorFilters'
 
@@ -17,6 +19,16 @@ const dragging = ref(false)
 const dragStartY = ref(0)
 const dragStartTop = ref(0)
 const filtered = computed(() => filterOperators(props.operators, profession.value, element.value))
+const assets = computed(() => [
+  '/assets/endfield/operator-list/banner.jpg',
+  '/assets/endfield/operator-list/deco-right.jpg',
+  '/assets/endfield/operator-list/card-bg.jpg',
+  '/assets/endfield/operators/block-bg.svg',
+  ...professions.map(option => option.icon),
+  ...elements.map(option => option.icon),
+  ...props.operators.map(operator => operator.portrait),
+])
+const { loading, progress } = useAssetPreloader(assets)
 const thumbSize = computed(() => {
   if (!viewportHeight.value || !contentHeight.value) return 0
   return Math.min(100, (viewportHeight.value / contentHeight.value) * 100)
@@ -101,6 +113,7 @@ watch([profession, element], () => {
         <div class="ol-thumb" :class="{ dragging }" :style="scrollbarStyle" @pointerdown.stop="startDrag" @pointermove="drag" @pointerup="stopDrag" @pointercancel="stopDrag"></div>
       </div>
       <span class="ol-status" role="status">共 {{ filtered.length }} 名干员</span>
+      <AssetLoadingOverlay :visible="loading" label="LOADING OPERATORS" :progress="progress" />
     </div>
   </section>
 </template>

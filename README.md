@@ -35,6 +35,10 @@
         - `NewsList`：[终末地](https://endfield.hypergryph.com/news) 的公告概览列表
 
             > "公告详情" 还没做（官方实现是 Page 不是 Card，有点怪？）
+        
+        - `OperatorList`：[终末地](https://endfield.hypergryph.com/operator) 的干员概览
+
+            > 没有实现点击后反向跳转至首页的 `OperatorCarousel` 联动
 
 
 ## 第三方素材声明
@@ -43,7 +47,7 @@
 
 - 于本项目中的存储位置：`src/assets`（除 `notuce_placesholder.svg` 外的内容）
 
-- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`、`EndfieldSidebar`
+- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`、`EndfieldSidebar`、`OperatorList`
 
 - 版权归属：© [2017-2026] [上海鹰角网络科技有限公司]
 

@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref, shallowRef } from 'vue'
+import AssetLoadingOverlay from '@/components/Endfield/Loaders/AssetLoadingOverlay.vue'
 
 const Particle2DMaskController = shallowRef(null)
 const presetSpecs = [
@@ -73,9 +74,7 @@ onMounted(loadParticleDemo)
             :masks="presets"
             @change="onChange"
           />
-          <div v-else class="particle-loading">
-            <span>LOADING MASK</span>
-          </div>
+          <AssetLoadingOverlay v-else visible compact tone="dark" label="LOADING MASK" />
         </div>
         <div class="p-status">
           <span>{{ maskName }}</span>
@@ -134,14 +133,4 @@ onMounted(loadParticleDemo)
   height: max(400px, 100%);
 }
 
-.particle-loading {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: rgba(248, 248, 238, .28);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .16em;
-}
 </style>

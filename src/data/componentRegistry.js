@@ -37,7 +37,36 @@ export const componentRegistry = [
     name: 'OperatorList',
     tag: '<OperatorList>',
     description: '来自「终末地」干员页的职业 / 属性筛选与可滚动卡片列表，不含侧栏、页脚和详情跳转。',
-    usage: `<OperatorList :operators="operators" @filter-change="onFilterChange" />`,
+    usageBlocks: [
+      {
+        label: 'operators 数据结构', language: 'js', code: `const operators = [
+  {
+    key: 'typhoea',
+    name: '提弗洛斯',
+    codename: 'Typhoeus',
+    prof: 'assault',
+    elem: 'nature',
+    rarity: 6,
+    portrait: '/assets/endfield/operator-list/typhoea.png',
+  },
+  {
+    key: 'purrche',
+    name: '噗切娜',
+    codename: 'Purrchena',
+    prof: 'shielder',
+    elem: 'physic',
+    rarity: 5,
+    portrait: '/assets/endfield/operator-list/purrche.png',
+  },
+]`,
+      },
+      {
+        label: '组件绑定', language: 'vue', code: `<OperatorList
+  :operators="operators"
+  @filter-change="onFilterChange"
+/>`,
+      },
+    ],
     props: [
       { name: 'operators', type: 'Array<{ key, name, codename, prof, elem, rarity, portrait? }>', default: '[]', desc: '本地干员数据；key 唯一。预览用 7 名干员重复 5 组，覆盖全部职业与属性。' },
     ],

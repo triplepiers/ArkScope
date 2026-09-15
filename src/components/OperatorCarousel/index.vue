@@ -1,8 +1,10 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { preloadAssets, useAssetPreloader } from '@/composables/useAssetPreloader'
 import ResponsiveDesignCanvas from '@/components/ResponsiveDesignCanvas/index.vue'
 import ModeSwitch from '@/components/Endfield/Switches/ModeSwitch.vue'
 import IconTextButton from '@/components/Endfield/Buttons/IconTextButton.vue'
+import AssetLoadingOverlay from '@/components/Endfield/Loaders/AssetLoadingOverlay.vue'
 import OperatorSelector from './OperatorSelector.vue'
 import OperatorDetail from './OperatorDetail.vue'
 import { assetUrl, wrapIndex } from './operatorUtils.js'
@@ -15,6 +17,21 @@ const mode = ref('2d')
 const root = ref(null)
 const active = ref(false)
 const entered = ref(false)
+const initialAssets = computed(() => {
+  const initial = props.operators[wrapIndex(props.initialIndex, props.operators.length)]
+  return [
+    '/assets/endfield/operators/block-bg.svg',
+    '/assets/endfield/operators/tape-wave.png',
+    '/assets/endfield/operators/divider-deco.svg',
+    '/assets/endfield/operators/avatar-active.svg',
+    '/assets/endfield/operators/all-operators.png',
+    '/assets/endfield/operators/star.png',
+    ...props.operators.flatMap(operator => [operator.avatar, `/assets/endfield/operators/icons/${operator.prof}.jpg`, `/assets/endfield/operators/icons/${operator.elem}.jpg`]),
+    initial?.illust,
+  ].map(assetUrl)
+})
+const deferredIllustrations = computed(() => props.operators.map(operator => assetUrl(operator.illust)))
+const { loading, ready: assetsReady, progress } = useAssetPreloader(initialAssets)
 let observer
 function select(index) {
   const next = wrapIndex(index, props.operators.length)
@@ -27,6 +44,7 @@ function toggleMode(value) {
   emit('mode-change', mode.value)
 }
 watch(() => props.operators, () => { selected.value = wrapIndex(selected.value, props.operators.length) })
+watch(assetsReady, (ready) => { if (ready) void preloadAssets(deferredIllustrations.value) })
 onMounted(() => {
   observer = new IntersectionObserver(([entry]) => {
     active.value = entry.isIntersecting
@@ -57,6 +75,7 @@ defineExpose({ select })
         <OperatorSelector :operators="operators" :selected="selected" @select="select" />
         <IconTextButton class="oc-all" label="全部干员" :icon="assetUrl('/assets/endfield/operators/all-operators.png')" aria-label="全部干员（暂未开放）" />
         <ModeSwitch v-if="current" class="oc-mode" :model-value="mode" @update:model-value="toggleMode" />
+        <AssetLoadingOverlay :visible="loading" label="LOADING OPERATORS" :progress="progress" />
       </div>
     </ResponsiveDesignCanvas>
   </section>

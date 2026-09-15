@@ -11,6 +11,7 @@
     - 接收 `operators` 数组（默认空）、`initialIndex` 初始下标（默认 0）
     - 触发 `change({ index, operator })`（切换干员） 和 `mode-change('2d' | '3d')`（切换 2D / 3D 立绘）
     - 通过组件 ref 暴露 `select(index)`
+    - 首屏预载框架、全部头像与当前 2D 立绘；其余 2D 立绘随后后台缓存，3D 视频仅在切换到 3D 时按当前干员加载，不会一次下载全部视频
 
 2. `OperatorSelector.vue`：循环头像列表、上下翻动、头像选择。
 3. `OperatorDetail.vue`：名称、阵营、种族、星级、职业/属性、CV、介绍及立绘。
