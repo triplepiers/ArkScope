@@ -1,5 +1,6 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId } from 'vue'
+import { assetUrl } from '../../../utils/assetUrl.js'
 
 const props = defineProps({
   label: { type: String, required: true },
@@ -12,7 +13,7 @@ const trigger = ref(null)
 const panel = ref(null)
 const open = ref(false)
 const id = useId()
-const all = computed(() => [{ value: '', label: '不限', icon: '/assets/endfield/operator-list/none.png' }, ...props.options])
+const all = computed(() => [{ value: '', label: '不限', icon: assetUrl('/assets/endfield/operator-list/none.png') }, ...props.options])
 const selected = computed(() => all.value.find(option => option.value === props.modelValue) || all.value[0])
 async function show() {
   open.value = true
@@ -46,12 +47,12 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', outside))
 <template>
   <div ref="root" class="icon-select" @keydown="keydown" @focusout="blur">
     <button ref="trigger" type="button" class="is-trigger" :aria-label="`${label}：${selected.label}`" aria-haspopup="listbox" :aria-expanded="open" :aria-controls="id" @click="open ? close() : show()">
-      <span class="is-label">{{ label }}</span><img class="is-arrow" :class="{ open }" src="/assets/endfield/operator-list/arrow.png" alt="" />
+      <span class="is-label">{{ label }}</span><img class="is-arrow" :class="{ open }" :src="assetUrl('/assets/endfield/operator-list/arrow.png')" alt="" />
       <span class="is-divider"></span><img class="is-selected-icon" :src="selected.icon" alt="" />
     </button>
     <div v-show="open" :id="id" ref="panel" class="is-panel" role="listbox" :aria-label="label">
       <button v-for="option in all" :key="option.value" type="button" role="option" tabindex="-1" :aria-selected="option.value === modelValue" class="is-option" @click="select(option.value)">
-        <img :src="option.icon" alt="" /><span>{{ option.label }}</span>
+        <img :src="assetUrl(option.icon)" alt="" /><span>{{ option.label }}</span>
       </button>
     </div>
   </div>

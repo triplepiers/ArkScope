@@ -1,4 +1,5 @@
 <script setup>
+import { assetUrl } from '../../../utils/assetUrl.js'
 import { professions, elements } from './operatorFilters'
 defineProps({ operator: { type: Object, required: true }, index: Number, total: Number })
 const category = value => [...professions, ...elements].find(option => option.value === value)
@@ -6,11 +7,11 @@ const category = value => [...professions, ...elements].find(option => option.va
 
 <template>
   <article class="operator-card" :aria-label="operator.name">
-    <img v-if="operator.portrait" class="op-portrait" :src="operator.portrait" alt="" loading="lazy" />
+    <img v-if="operator.portrait" class="op-portrait" :src="assetUrl(operator.portrait)" alt="" loading="lazy" />
     <div class="op-content" :data-rarity="operator.rarity">
       <h3>{{ operator.name }}</h3>
       <div class="op-subtitle"><span>// {{ operator.codename }}</span><span>{{ String(index + 1).padStart(2, '0') }} / {{ total }}</span></div>
-      <div class="op-icons"><img v-for="value in [operator.prof, operator.elem]" :key="value" :src="category(value)?.icon" :alt="category(value)?.label || value" /></div>
+      <div class="op-icons"><img v-for="value in [operator.prof, operator.elem]" :key="value" :src="assetUrl(category(value)?.icon)" :alt="category(value)?.label || value" /></div>
     </div>
   </article>
 </template>

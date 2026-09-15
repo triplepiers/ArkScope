@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useAssetPreloader } from '@/composables/useAssetPreloader'
+import { assetUrl } from '@/utils/assetUrl.js'
 import IconSelect from '../Dropdowns/IconSelect.vue'
 import AssetLoadingOverlay from '../Loaders/AssetLoadingOverlay.vue'
 import OperatorCard from './OperatorCard.vue'
@@ -27,7 +28,7 @@ const assets = computed(() => [
   ...professions.map(option => option.icon),
   ...elements.map(option => option.icon),
   ...props.operators.map(operator => operator.portrait),
-])
+].map(path => assetUrl(path)))
 const { loading, progress } = useAssetPreloader(assets)
 const thumbSize = computed(() => {
   if (!viewportHeight.value || !contentHeight.value) return 0
@@ -97,7 +98,7 @@ watch([profession, element], () => {
 <template>
   <section class="operator-list" aria-label="干员列表">
     <div class="ol-canvas">
-      <div class="ol-background" aria-hidden="true"><div class="ol-wordmark">ENDFIELD</div><div class="ol-grid"></div><div class="ol-right"></div><img class="ol-banner" src="/assets/endfield/operator-list/banner.jpg" alt="" /></div>
+      <div class="ol-background" aria-hidden="true"><div class="ol-wordmark">ENDFIELD</div><div class="ol-grid"></div><div class="ol-right"></div><img class="ol-banner" :src="assetUrl('/assets/endfield/operator-list/banner.jpg')" alt="" /></div>
       <div class="ol-filters">
         <IconSelect v-model="profession" label="干员职业" :options="professions" />
         <IconSelect v-model="element" label="属性" :options="elements" />

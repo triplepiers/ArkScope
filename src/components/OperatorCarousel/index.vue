@@ -28,7 +28,7 @@ const initialAssets = computed(() => {
     '/assets/endfield/operators/star.png',
     ...props.operators.flatMap(operator => [operator.avatar, `/assets/endfield/operators/icons/${operator.prof}.jpg`, `/assets/endfield/operators/icons/${operator.elem}.jpg`]),
     initial?.illust,
-  ].map(assetUrl)
+  ].map(path => assetUrl(path))
 })
 const deferredIllustrations = computed(() => props.operators.map(operator => assetUrl(operator.illust)))
 const { loading, ready: assetsReady, progress } = useAssetPreloader(initialAssets)

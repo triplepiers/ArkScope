@@ -1,4 +1,6 @@
-const icon = key => `/assets/endfield/operators/icons/${key}.jpg`
+import { assetUrl } from '../../../utils/assetUrl.js'
+
+const icon = key => assetUrl(`/assets/endfield/operators/icons/${key}.jpg`)
 export const professions = [
   ['guard', '近卫'], ['caster', '术师'], ['support', '辅助'],
   ['shielder', '重装'], ['vanguard', '先锋'], ['assault', '突击'],
