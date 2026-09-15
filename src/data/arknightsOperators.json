@@ -1,0 +1,74 @@
+[
+  {
+    "key": "kaltsit",
+    "name": "凯尔希",
+    "codename": "KAL'TSIT",
+    "faction": "RHODES ISLAND",
+    "factionIcon": "/assets/arknights/operator-carousel/rhodes-island.png",
+    "description": "罗德岛最高管理者之一，阿米娅的直接辅导者。\n罗德岛医疗部门的总负责人。\n作为罗德岛的老成员，凯尔希医生是在阿米娅背后最稳固的援护者。",
+    "voices": [{ "locale": "日", "name": "日笠阳子" }, { "locale": "中", "name": "刘雪" }],
+    "thumbnail": "/assets/arknights/operator-carousel/kaltsit-thumb.png",
+    "background": "/assets/arknights/operator-carousel/kaltsit-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/kaltsit-e1.png", "/assets/arknights/operator-carousel/kaltsit-e2.png"]
+  },
+  {
+    "key": "amiya",
+    "name": "阿米娅",
+    "codename": "AMIYA",
+    "faction": "RHODES ISLAND",
+    "factionIcon": "/assets/arknights/operator-carousel/rhodes-island.png",
+    "description": "罗德岛的公开领袖，在内部拥有最高执行权。\n虽然外表尚显稚嫩，却已经赢得了同伴们的信任。",
+    "voices": [{ "locale": "日", "name": "黑泽朋世" }, { "locale": "中", "name": "张韦" }],
+    "thumbnail": "/assets/arknights/operator-carousel/amiya-thumb.png",
+    "background": "/assets/arknights/operator-carousel/amiya-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/amiya-e1.png", "/assets/arknights/operator-carousel/amiya-e2.png"]
+  },
+  {
+    "key": "chen",
+    "name": "陈",
+    "codename": "CH'EN",
+    "faction": "LUNGMEN",
+    "factionIcon": "/assets/arknights/operator-carousel/lungmen.png",
+    "description": "龙门近卫局特别督察组组长。\n在各类案件与大型行动中展现出强大的指挥和战斗能力。",
+    "voices": [{ "locale": "日", "name": "石上静香" }, { "locale": "中", "name": "虫虫" }],
+    "thumbnail": "/assets/arknights/operator-carousel/chen-thumb.png",
+    "background": "/assets/arknights/operator-carousel/chen-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/chen-e1.png", "/assets/arknights/operator-carousel/chen-e2.png"]
+  },
+  {
+    "key": "texas",
+    "name": "德克萨斯",
+    "codename": "TEXAS",
+    "faction": "PENGUIN LOGISTICS",
+    "factionIcon": "/assets/arknights/operator-carousel/penguin-logistics.png",
+    "description": "企鹅物流员工，担任载具驾驶与战斗护卫。\n沉默、冷静，并始终能可靠地完成委托。",
+    "voices": [{ "locale": "日", "name": "田所梓" }, { "locale": "中", "name": "张琦" }],
+    "thumbnail": "/assets/arknights/operator-carousel/texas-thumb.png",
+    "background": "/assets/arknights/operator-carousel/texas-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/texas-e1.png", "/assets/arknights/operator-carousel/texas-e2.png"]
+  },
+  {
+    "key": "exusiai",
+    "name": "能天使",
+    "codename": "EXUSIAI",
+    "faction": "PENGUIN LOGISTICS",
+    "factionIcon": "/assets/arknights/operator-carousel/penguin-logistics.png",
+    "description": "企鹅物流员工，擅长用乐观态度处理危险任务。\n作为射手，她的迅捷与精准同样值得信赖。",
+    "voices": [{ "locale": "日", "name": "石见舞菜香" }, { "locale": "中", "name": "小N" }],
+    "thumbnail": "/assets/arknights/operator-carousel/exusiai-thumb.png",
+    "background": "/assets/arknights/operator-carousel/exusiai-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/exusiai-e1.png", "/assets/arknights/operator-carousel/exusiai-e2.png"]
+  },
+  {
+    "key": "ptilopsis",
+    "name": "白面鸮",
+    "codename": "PTILOPSIS",
+    "faction": "RHODES ISLAND",
+    "factionIcon": "/assets/arknights/operator-carousel/rhodes-island.png",
+    "description": "前莱茵生命数据维护专员，现为罗德岛医疗干员。\n以独特而精确的方式分析现场信息。",
+    "voices": [{ "locale": "日", "name": "金元寿子" }, { "locale": "中", "name": "冯骏骅" }],
+    "thumbnail": "/assets/arknights/operator-carousel/ptilopsis-thumb.png",
+    "background": "/assets/arknights/operator-carousel/ptilopsis-bg.png",
+    "arts": ["/assets/arknights/operator-carousel/ptilopsis-e1.png", "/assets/arknights/operator-carousel/ptilopsis-e2.png"]
+  }
+]

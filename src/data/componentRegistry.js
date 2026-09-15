@@ -2,6 +2,7 @@ const showcaseLoaders = {
   'operator-list': () => import('../components/showcases/OperatorListShowcase.vue'),
   'endfield-sidebar': () => import('../components/showcases/EndfieldSidebarShowcase.vue'),
   'operator-carousel': () => import('../components/showcases/OperatorCarouselShowcase.vue'),
+  'arknights-operator-carousel': () => import('../components/showcases/ArknightsOperatorCarouselShowcase.vue'),
   'news-list': () => import('../components/showcases/NewsListShowcase.vue'),
   'scramble-title': () => import('../components/showcases/ScrambleTitleShowcase.vue'),
   'particle-2d': () => import('../components/showcases/Particle2DShowcase.vue'),
@@ -395,6 +396,56 @@ const secondaryItems = [
     exposed: [{ name: 'select', params: '(index)', desc: '按索引切换干员，支持循环取模。' }],
     component: () => loadShowcase('operator-carousel'),
     preload: () => preloadShowcase('operator-carousel'),
+  },
+  {
+    id: 'arknights-operator-carousel',
+    category: 'display',
+    project: '明日方舟',
+    name: 'ArknightsOperatorCarousel',
+    tag: '<ArknightsOperatorCarousel>',
+    description: '来自「明日方舟」官网的干员轮播主体，包含双立绘、Character Voice 与左下缩略列表。',
+    usage: `<ArknightsOperatorCarousel :operators="operators" @change="onChange" />`,
+    usageBlocks: [
+      { label: 'operators 数组结构', language: 'js', code: `const operators = [{
+  key: 'amiya',                  // 必填：唯一标识，同时用于立绘定位
+  name: '阿米娅',                // 中文名
+  codename: 'AMIYA',             // 英文名（含镂空装饰）
+  faction: 'RHODES ISLAND',      // 阵营名称 / 图标替代文本
+  factionIcon: '/assets/arknights/operator-carousel/rhodes-island.png',
+  description: '罗德岛的公开领袖。', // 介绍，可用换行分段
+  thumbnail: '/assets/arknights/operator-carousel/amiya-thumb.png',
+  background: '/assets/arknights/operator-carousel/amiya-bg.png',
+  arts: [                       // 按 I / II 顺序提供两张透明立绘
+    '/assets/arknights/operator-carousel/amiya-e1.png',
+    '/assets/arknights/operator-carousel/amiya-e2.png',
+  ],
+  voices: [                     // 仅文字与切换状态，不需要音频 URL
+    { locale: '日', name: '黑泽朋世' },
+    { locale: '中', name: '陶典' },
+  ],
+  // 可选：自定义两阶段定位；省略时使用内置干员定位或通用默认值
+  // 每项为 [原点X, 原点Y, 位移X, 位移Y, 缩放]，坐标按1024归一化
+  artFocus: [[504, 432, -376, -208, 1.3], [520, 510, -418, -316, 1.5]],
+}]` },
+      { label: '组件绑定', language: 'vue', code: `<ArknightsOperatorCarousel
+  :operators="operators"
+  :initial-index="0"
+  @change="({ index, operator }) => console.log(index, operator)"
+/>` },
+    ],
+    props: [
+      { name: 'operators', type: 'Array<ArknightsOperator>', default: '[]', desc: '结构见下方示例。图片自动去重预加载并显示进度；支持部署子路径和完整 URL。空数组显示空状态。' },
+      { name: 'initialIndex', type: 'Number', default: '0', desc: '初始干员索引，超出范围时循环取模。' },
+    ],
+    events: [
+      { name: 'change', payload: '{ index, operator }', desc: '切换干员。' },
+      { name: 'phase-change', payload: '{ phase, operator }', desc: '切换第一 / 第二张立绘。' },
+      { name: 'voice-change', payload: '{ index, voice, operator }', desc: '切换 Character Voice，不加载声音资源。' },
+      { name: 'voice-preview', payload: '{ voice, active }', desc: '点击声音图标时只同步 UI 状态。' },
+    ],
+    exposed: [{ name: 'select', params: '(index)', desc: '切换干员。' }, { name: 'setPhase', params: '(0 | 1)', desc: '切换立绘档位。' }],
+    component: () => loadShowcase('arknights-operator-carousel'),
+    preload: () => preloadShowcase('arknights-operator-carousel'),
   },
   {
     id: 'news-list',

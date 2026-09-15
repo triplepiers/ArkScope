@@ -22,6 +22,8 @@
 
         - `OperatorCarousel`：[终末地](https://endfield.hypergryph.com/#operator) 的干员轮播图组件（附带干员列表翻页、Blink 切换）
 
+        - `ArknightsOperatorCarousel`：[明日方舟](https://ak.hypergryph.com/#operator) 干员轮播图（去除了 topBar 和右侧的 section 显示）
+
         - `FullScreenNavigator`：[明日方舟](https://ak.hypergryph.com) 的全屏滚动 Section 切换（附带 Section + 标题 的 Reveal 动画，滚动方向敏感）
     
     - 粒子效果
@@ -43,11 +45,15 @@
 
 ## 第三方素材声明
 
-本项目包含来自 [明日方舟 · 终末地](https://endfield.hypergryph.com) 的 SVG 和 PNG 素材
+- 本项目包含第三方素材，存储鱼：`src/assets`（除 `notice_placesholder.svg` 外的内容）
 
-- 于本项目中的存储位置：`src/assets`（除 `notuce_placesholder.svg` 外的内容）
+    - 来自 [明日方舟 · 终末地](https://endfield.hypergryph.com) 的素材，涉及组件
 
-- 涉及组件：`GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`、`EndfieldSidebar`、`OperatorList`
+        `GameplayAlbum`、`NoticeCarousel`、`OperatorCarousel`、`NewsList`、`EndfieldSidebar`、`OperatorList`
+
+    - 来自 [明日方舟](https://ak.hypergryph.com) 的素材，涉及组件
+
+        `ArknightsOperatorCarousel`
 
 - 版权归属：© [2017-2026] [上海鹰角网络科技有限公司]
 

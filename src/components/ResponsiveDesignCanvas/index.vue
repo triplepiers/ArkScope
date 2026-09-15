@@ -6,6 +6,7 @@ const props = defineProps({
   designHeight: { type: Number, required: true },
   minWidth: { type: Number, default: 720 },
   maxScale: { type: Number, default: 1 },
+  fitHeight: { type: Boolean, default: false },
 })
 
 const shell = ref(null)
@@ -14,7 +15,11 @@ const scale = ref(1)
 function updateScale() {
   if (!shell.value) return
   const availableWidth = Math.max(shell.value.clientWidth, props.minWidth)
-  scale.value = Math.min(availableWidth / props.designWidth, props.maxScale)
+  const widthScale = availableWidth / props.designWidth
+  const heightScale = props.fitHeight && shell.value.clientHeight
+    ? shell.value.clientHeight / props.designHeight
+    : Number.POSITIVE_INFINITY
+  scale.value = Math.min(widthScale, heightScale, props.maxScale)
 }
 
 const frameStyle = computed(() => ({
@@ -38,7 +43,7 @@ onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
-  <div ref="shell" class="responsive-canvas" :style="{ '--minimum-width': `${minWidth}px` }">
+  <div ref="shell" class="responsive-canvas" :class="{ 'responsive-canvas--fit-height': fitHeight }" :style="{ '--minimum-width': `${minWidth}px` }">
     <div class="responsive-canvas__frame" :style="frameStyle">
       <div class="responsive-canvas__design" :style="canvasStyle"><slot /></div>
     </div>
@@ -46,5 +51,5 @@ onBeforeUnmount(() => observer?.disconnect())
 </template>
 
 <style scoped>
-.responsive-canvas { display:flex; flex-direction:column; align-items:center; width:100%; min-width:var(--minimum-width); }.responsive-canvas__frame { flex:none; }.responsive-canvas__design { transform-origin:top left; }
+.responsive-canvas { display:flex; flex-direction:column; align-items:center; width:100%; min-width:var(--minimum-width); }.responsive-canvas--fit-height { justify-content:center; height:100%; min-height:0; }.responsive-canvas__frame { flex:none; }.responsive-canvas__design { transform-origin:top left; }
 </style>
