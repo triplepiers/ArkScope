@@ -1,6 +1,8 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import ResponsiveDesignCanvas from '@/components/ResponsiveDesignCanvas/index.vue'
+import ModeSwitch from '@/components/Endfield/Switches/ModeSwitch.vue'
+import IconTextButton from '@/components/Endfield/Buttons/IconTextButton.vue'
 import OperatorSelector from './OperatorSelector.vue'
 import OperatorDetail from './OperatorDetail.vue'
 import { assetUrl, wrapIndex } from './operatorUtils.js'
@@ -20,8 +22,8 @@ function select(index) {
   selected.value = next
   emit('change', { index: next, operator: props.operators[next] })
 }
-function toggleMode() {
-  mode.value = mode.value === '2d' ? '3d' : '2d'
+function toggleMode(value) {
+  mode.value = value
   emit('mode-change', mode.value)
 }
 watch(() => props.operators, () => { selected.value = wrapIndex(selected.value, props.operators.length) })
@@ -53,8 +55,8 @@ defineExpose({ select })
           </Transition>
         </div>
         <OperatorSelector :operators="operators" :selected="selected" @select="select" />
-        <button type="button" class="oc-all" aria-label="全部干员（暂未开放）"><img :src="assetUrl('/assets/endfield/operators/all-operators.png')" alt="" />全部干员</button>
-        <button v-if="current" type="button" class="oc-mode" :class="{ active: mode === '3d' }" :aria-pressed="mode === '3d'" :aria-label="mode === '2d' ? '切换至 3D 立绘' : '切换至 2D 立绘'" @click="toggleMode"><span>{{ mode.toUpperCase() }}</span></button>
+        <IconTextButton class="oc-all" label="全部干员" :icon="assetUrl('/assets/endfield/operators/all-operators.png')" aria-label="全部干员（暂未开放）" />
+        <ModeSwitch v-if="current" class="oc-mode" :model-value="mode" @update:model-value="toggleMode" />
       </div>
     </ResponsiveDesignCanvas>
   </section>
@@ -80,11 +82,7 @@ defineExpose({ select })
 .oc-rule img { position:absolute; left:60.5px; top:50%; width:142.5px; height:auto; transform:translateY(-50%); }
 .oc-plus { position:absolute; right:42px; top:80px; font:24px/81px monospace; color:#bbb; }
 .oc-detail-stage { position:absolute; inset:0; opacity:0; }
-.oc-all { position:absolute; left:84px; top:608px; display:flex; align-items:center; gap:7px; height:30px; padding:0 10px; border:0; border-radius:2.5px; color:#eee; background:#383838; font:12px OperatorSans,sans-serif; cursor:pointer; opacity:0; transition:background-color .2s; }
-.oc-all img { width:16.5px; height:16.5px; }.oc-all:hover { background:#626262; }.oc-all:active { background:#282828; }
-.oc-mode { position:absolute; left:1105.5px; top:444px; width:36px; height:60px; border:2px solid #666; border-radius:18px; padding:0; background:#0008; box-shadow:0 0 6px #fff; cursor:pointer; opacity:0; }
-.oc-mode span { position:absolute; top:2px; left:1px; display:grid; place-items:center; width:30px; height:30px; border:2px solid #333; border-radius:50%; background:#e6e6e6; color:#333; font:10px OperatorNumber,sans-serif; transform:translateY(23px); transition:transform .2s; }
-.oc-mode.active span { transform:translateY(0); }.oc-mode.active { background:#000b; }
+.oc-all { position:absolute; left:84px; top:608px; opacity:0; }
 .oc-scene :deep(.operator-selector) { opacity:0; }
 .entered .oc-flag { animation:oc-opacity .4s .3s forwards; }.entered .oc-wordmark,.entered .oc-tape,.entered .oc-rule { animation:oc-slide .4s .3s ease-out forwards; }
 .entered .oc-detail-stage { animation:oc-opacity .3s .6s forwards; }
@@ -101,4 +99,5 @@ defineExpose({ select })
 button:focus-visible { outline:3px solid #888; outline-offset:4px; }
 @keyframes oc-opacity { to { opacity:1; } }@keyframes oc-slide { to { transform:translateX(0); } }
 @media(prefers-reduced-motion:reduce) { .entered .oc-flag,.entered .oc-detail-stage,.entered .oc-all,.entered .oc-mode,.entered :deep(.operator-selector) { animation:none; opacity:1; }.entered .oc-wordmark,.entered .oc-tape,.entered .oc-rule { animation:none; transform:none; }.oc-switch-enter-active,.oc-switch-leave-active,.oc-mode span { transition:none; }.oc-switch-leave-active :deep(.od-rec),.oc-switch-leave-active :deep(.od-copy),.oc-switch-leave-active :deep(.od-media) { animation:none; transition:none; }.oc-switch-leave-to :deep(.od-media) { opacity:0; } }
+.oc-mode { position:absolute; left:1105.5px; top:444px; opacity:0; }
 </style>

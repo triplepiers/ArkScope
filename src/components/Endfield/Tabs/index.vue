@@ -1,8 +1,7 @@
 <script setup>
 import arrow from '@/assets/endfield/news-list/tab-arrow.svg'
-import { NEWS_TABS } from './newsData.js'
 
-const props = defineProps({ modelValue: { type: String, default: 'latest' }, tags: { type: Array, default: () => NEWS_TABS }, disabled: Boolean })
+const props = defineProps({ modelValue: { type: String, default: '' }, tags: { type: Array, default: () => [] }, disabled: Boolean })
 const emit = defineEmits(['update:modelValue'])
 function move(event, index) {
   const keys = { ArrowRight: (index + 1) % props.tags.length, ArrowLeft: (index + props.tags.length - 1) % props.tags.length, Home: 0, End: props.tags.length - 1 }
@@ -15,7 +14,7 @@ function move(event, index) {
 </script>
 
 <template>
-  <div class="news-tabs" role="tablist" aria-label="公告分类">
+  <div class="news-tabs" role="tablist" aria-label="分类">
     <button v-for="(tab, index) in tags" :key="tab.value" type="button" role="tab"
       :aria-selected="modelValue === tab.value" :tabindex="modelValue === tab.value ? 0 : -1"
       :disabled="disabled" @click="emit('update:modelValue', tab.value)" @keydown="move($event, index)">
@@ -25,6 +24,7 @@ function move(event, index) {
 </template>
 
 <style scoped>
+@font-face { font-family:NewsHarmony; src:url('@/assets/fonts/endfield/harmonyos-sans-sc-medium.woff2'); }
 .news-tabs { display:flex; align-items:center; gap:calc(1.4375 * var(--news-unit, 8px)); width:max-content; max-width:100%; overflow-x:auto; padding:3px 0; box-sizing:content-box; }
 button { flex-shrink:0; position:relative; height:calc(3.75 * var(--news-unit, 8px)); padding:0 calc(3 * var(--news-unit, 8px)); border:0; border-radius:4px; background:transparent; color:#191919; cursor:pointer; transition:background-color .2s ease; }
 button + button::before { content:''; position:absolute; left:calc(-.8125 * var(--news-unit, 8px)); top:50%; transform:translateY(-50%); width:calc(.1875 * var(--news-unit, 8px)); height:calc(2.5 * var(--news-unit, 8px)); background:#d9d9d9; }

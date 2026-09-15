@@ -1,9 +1,9 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import NewsHeader from './NewsHeader.vue'
-import NewsTabs from './NewsTabs.vue'
+import NewsTabs from '@/components/Endfield/Tabs/index.vue'
 import NewsBlock from './NewsBlock.vue'
-import NewsPagination from './NewsPagination.vue'
+import NewsPagination from '@/components/Endfield/Pagination/index.vue'
 import { NEWS_TABS } from './newsData.js'
 
 const props = defineProps({

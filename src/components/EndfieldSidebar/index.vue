@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { sidebarItems } from './items.js'
+import PlayButton from '@/components/Endfield/Buttons/PlayButton.vue'
 import logo from '@/assets/endfield/sidebar/logo.svg'
 
 const props = defineProps({
@@ -134,11 +135,7 @@ onBeforeUnmount(() => observer?.disconnect())
         </component>
       </div>
       </div>
-      <button class="ef-play" type="button" :aria-label="actionLabel" @click="emit('action', 'play')">
-        <span class="ef-icon" :style="iconStyle('triangle')" aria-hidden="true" />
-        <span class="ef-play-divider" />
-        <span class="ef-play-label">{{ actionLabel }}</span>
-      </button>
+      <PlayButton class="ef-play-position" :label="actionLabel" :expanded="expanded" @click="emit('action', 'play')" />
       <button class="ef-switcher" type="button" :aria-label="expanded ? '收起导航' : '展开导航'" :aria-expanded="expanded" @click="expanded = !expanded">
         <span class="ef-switcher-image" />
         <span class="ef-icon" :style="iconStyle('switcher-deco')" aria-hidden="true" />
@@ -149,7 +146,7 @@ onBeforeUnmount(() => observer?.disconnect())
         <button class="ef-mobile-logo" :style="expanded ? { transform: `translate(${logoPosition.x}px, ${logoPosition.y}px) scale(1)` } : undefined" type="button" aria-label="返回首页" @click="items[0] && select(items[0], $event)"><img :src="logo" alt="明日方舟：终末地" /></button>
         <div class="ef-mobile-actions">
           <button v-for="item in headerItems" :key="item.id" type="button" class="ef-mobile-sound" :aria-label="item.label" :aria-pressed="item.pressed" @click="secondarySelect(item, $event)"><span class="ef-icon" :style="iconStyle(item.icon)" /></button>
-          <button class="ef-mobile-play" type="button" @click="emit('action', 'play')"><span class="ef-icon" :style="iconStyle('triangle')" /><span>{{ actionLabel }}</span></button>
+          <PlayButton mobile :label="actionLabel" @click="emit('action', 'play')" />
         </div>
         <button class="ef-mobile-toggle" type="button" :aria-label="expanded ? '收起导航' : '展开导航'" :aria-expanded="expanded" @click="expanded = !expanded">
           <span class="ef-icon ef-toggle-menu" :class="{ hidden: expanded }" :style="iconStyle('menu')" aria-hidden="true" />
@@ -228,15 +225,6 @@ onBeforeUnmount(() => observer?.disconnect())
 .ef-tools .ef-icon { position: absolute; left: 1.875em; top: 50%; transform: translate(-50%, -50%); width: 1.75em; height: 1.75em; }
 .ef-tools .ef-tool-item:hover { color: #191919; }
 .ef-tools .ef-label { left: 5em; color: #191919; }
-.ef-play { position: absolute; bottom: 9.5625em; left: 1.5em; width: 4.5em; height: 9.75em; overflow: hidden; border-radius: .25em; background: repeating-linear-gradient(-45deg, #191919 0 2px, #080808 2px 4px) !important; color: #fff !important; transition: width .3s, height .3s, color .2s; }
-.ef-play:hover { background: #fffa00 !important; color: #191919 !important; }
-.ef-play .ef-icon { position: absolute; top: 1.25em; left: 1.28125em; width: 1.9375em; height: 1.75em; }
-.ef-play-divider { position: absolute; top: 4.125em; left: .75em; width: 3em; height: 2px; background: currentColor; opacity: .3; }
-.ef-play-label { position: absolute; top: 4.5em; left: .575em; width: 2.45em; font-size: 1.25em; line-height: 1.125; letter-spacing: .05em; text-align: center; font-weight: 700; }
-.expanded .ef-play { width: 19.5em; height: 4em; }
-.expanded .ef-play .ef-icon { top: 1.125em; }
-.expanded .ef-play-divider { left: 5.3125em; top: .625em; width: 2px; height: 2.75em; }
-.expanded .ef-play-label { left: 6em; top: 1.0375em; width: auto; white-space: nowrap; }
 .ef-switcher { position: absolute; left: 3.75em; bottom: 1.9375em; transform: translateX(-50%); display: grid; justify-items: center; gap: .375em; transition: left .3s; }
 .expanded .ef-switcher { left: 18.75em; }
 .ef-switcher-image { width: 1.5625em; height: .8125em; background: url('../../assets/endfield/sidebar/switcher-active.png') center / contain no-repeat; }
@@ -249,9 +237,6 @@ onBeforeUnmount(() => observer?.disconnect())
 .ef-mobile-actions { position: absolute; right: 9.75em; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 2.5em; }
 .ef-mobile-sound { width: 4.75em; height: 4.75em; display: grid; place-items: center; border-radius: .25em; background: #f2f2f2 !important; color: #7c7c7c !important; }
 .ef-mobile-sound .ef-icon { width: 2.8125em; height: 2.8125em; }
-.ef-mobile-play { height: 4.75em; min-width: 15.5em; display: flex; align-items: center; gap: 1.3125em; padding: 0 1.3125em !important; border-radius: .5em; color: #fff !important; background: repeating-linear-gradient(-45deg, #191919 0 2px, #080808 2px 4px) !important; }
-.ef-mobile-play .ef-icon { width: 2.625em; height: 2.625em; }
-.ef-mobile-play > span:last-child { border-left: 2px solid #ffffff60; padding-left: .75em; font: 1.875em EndfieldSidebarSans, sans-serif; white-space: nowrap; }
 .ef-mobile-toggle { position: absolute; right: 3.5em; top: 50%; transform: translateY(-50%); width: 3.3125em; height: 3.3125em; display: grid; place-items: center; z-index: 32; }
 .ef-mobile-toggle .ef-icon { grid-area: 1 / 1; width: 100%; transition: opacity .2s; }
 .ef-mobile-toggle .ef-toggle-menu { height: 2.625em; }
@@ -285,4 +270,5 @@ onBeforeUnmount(() => observer?.disconnect())
 .ef-mobile-slide-enter-active, .ef-mobile-slide-leave-active { transition: transform .3s; }
 .ef-mobile-slide-enter-from, .ef-mobile-slide-leave-to { transform: translateX(-105%); }
 @media (prefers-reduced-motion: reduce) { .ef-sidebar *, .ef-sidebar *::before { transition: none !important; } }
+.ef-play-position { position:absolute; bottom:9.5625em; left:1.5em; }
 </style>

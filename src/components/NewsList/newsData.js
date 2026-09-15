@@ -5,11 +5,6 @@ export const NEWS_TABS = [
   { label: '新闻', value: 'news' },
 ]
 
-// Zero-based first visible number; the current page occupies slot two until the end.
-export function pageWindow(page, totalPages) {
-  return Math.max(0, Math.min(page - 2, Math.max(0, totalPages - 4)))
-}
-
 export function bulletinUrl({ tab = 'latest', page = 1, pageSize = 9, lang = 'zh-cn' } = {}) {
   if (!NEWS_TABS.some((item) => item.value === tab)) throw new Error('未知公告分类')
   if (!Number.isInteger(page) || page < 1 || !Number.isInteger(pageSize) || pageSize < 1) throw new Error('页码和每页数量必须为正整数')

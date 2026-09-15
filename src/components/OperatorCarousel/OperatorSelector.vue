@@ -1,4 +1,5 @@
 <script setup>
+import RoundButton from '@/components/Endfield/Buttons/RoundButton.vue'
 import { computed, ref, watch } from 'vue'
 import { assetUrl, wrapIndex } from './operatorUtils.js'
 
@@ -28,7 +29,7 @@ function keydown(event) {
 
 <template>
   <div class="operator-selector" @wheel.stop.prevent="wheel" @keydown="keydown">
-    <button class="os-arrow os-up" type="button" aria-label="向上滚动四位干员" :disabled="operators.length < 2" @click="scroll(-4)">❮</button>
+    <RoundButton variant="operator" direction="up" class="os-arrow os-up" type="button" aria-label="向上滚动四位干员" :disabled="operators.length < 2" @click="scroll(-4)" />
     <div class="os-window" role="group" aria-label="干员列表">
       <button v-for="slot in operators.length ? slots : []" :key="slot" type="button" class="os-avatar"
         :class="{ active: wrapIndex(slot, operators.length) === selected }"
@@ -41,7 +42,7 @@ function keydown(event) {
         <img :src="assetUrl(operators[wrapIndex(slot, operators.length)].avatar)" alt="" />
       </button>
     </div>
-    <button class="os-arrow os-down" type="button" aria-label="向下滚动四位干员" :disabled="operators.length < 2" @click="scroll(4)">❮</button>
+    <RoundButton variant="operator" direction="down" class="os-arrow os-down" type="button" aria-label="向下滚动四位干员" :disabled="operators.length < 2" @click="scroll(4)" />
   </div>
 </template>
 
@@ -53,9 +54,9 @@ function keydown(event) {
 .os-avatar:hover,.os-avatar.active { border-color:#fffa00; border-width:2px; }
 .os-mark { position:absolute; width:100px; height:100px; max-width:none; opacity:0; transition:opacity .3s; pointer-events:none; }
 .active .os-mark { opacity:1; }
-.os-arrow { position:absolute; left:18px; width:42px; height:42px; display:grid; place-items:center; padding:0; border:2px solid #fff; outline:1px solid #ddd; outline-offset:-3px; border-radius:50%; box-shadow:0 0 5px #0202024d; background:#fafafa url('@/assets/endfield/gameplay-album/pagination-button-texture.png') center/cover; color:#444; font:20px/1 sans-serif; cursor:pointer; transition:background-color .2s; }
-.os-up { top:39px; transform:rotate(90deg); }.os-down { bottom:39px; transform:rotate(-90deg); }
-.os-arrow:hover:not(:disabled) { background-color:#fffa00; }.os-arrow:disabled { opacity:.4; }
+.os-arrow { position:absolute; left:18px; }
+.os-up { top:39px; }.os-down { bottom:39px; }
+
 button:focus-visible { outline:3px solid #888; outline-offset:4px; }
 @media (prefers-reduced-motion:reduce) { .os-avatar,.os-mark,.os-arrow { transition:none; } }
 </style>

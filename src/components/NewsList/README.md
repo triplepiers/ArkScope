@@ -47,10 +47,10 @@
 | --- | --- |
 | `index.vue` | 容器布局、分类/页码状态、数据加载和响应式切换 |
 | `NewsHeader.vue` | SVG + PNG + 可配置中文/英文标题 |
-| `NewsTabs.vue` | 四分类、选中/hover 动画、方向键/Home/End |
+| `../Endfield/Tabs/index.vue` | 可配置分类、选中/hover 动画、方向键/Home/End |
 | `NewsBlock.vue` | 当前页卡片网格、图片占位/失败回退、详情链接 |
-| `NewsPagination.vue` | 前后页、4 格滑动页码、窄屏当前页/总页数 |
-| `newsData.js` | 分类常量、页码窗口、官方 API 适配器 |
+| `../Endfield/Pagination/index.vue` | 前后页、4 格滑动页码、窄屏当前页/总页数 |
+| `newsData.js` | 分类常量、官方 API 适配器 |
 
 组件事件：
 
